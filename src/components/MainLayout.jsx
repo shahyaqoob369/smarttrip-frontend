@@ -1,17 +1,14 @@
 import React from 'react';
-import Navbar from './Navbar'; // Step 1: Import the component
 import Footer from './Footer';
 
 const MainLayout = ({ children }) => {
   return (
-    <div className="bg-gray-50 text-gray-800">
-      {/* Step 2: Replace the header placeholder */}
-      <Navbar />
-
+    // This creates the light blue background for the entire page
+    <div className="bg-sky-100 min-h-screen">
+      {/* Navbar is removed from here as it will be inside our new search card */}
       <main>
         {children}
       </main>
-
       <Footer />
     </div>
   );

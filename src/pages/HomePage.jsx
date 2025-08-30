@@ -4,8 +4,8 @@ import ServiceButtons from '../components/ServiceButtons';
 
 const HomePage = () => {
   return (
-    // This new div will act as the container for our page content
-    <div className="max-w-7xl mx-auto">
+    // This container will hold our main content sections
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
       <Hero />
       <ServiceButtons />
     </div>
