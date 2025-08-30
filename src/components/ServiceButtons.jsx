@@ -13,7 +13,7 @@ import InsuranceIcon from '../assets/icons/insurance.svg?react';
 import EsimIcon from '../assets/icons/esim.svg?react';
 import CompensationIcon from '../assets/icons/compensation.svg?react';
 
-const affiliateMarker = 'YOUR_AFFILIATE_ID'; // <-- REPLACE THIS
+const affiliateMarker = '661841';
 
 // We've re-added the 'href' property with the direct affiliate links
 const services = [
