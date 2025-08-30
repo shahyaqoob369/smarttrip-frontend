@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -10,6 +11,8 @@ const Footer = () => {
             {/* We can add social media or other links here later */}
             <a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-white">Terms of Service</a>
+            {/* Add the new link below */}
+            <Link to="/login" className="text-gray-400 hover:text-white">Admin Login</Link>
           </div>
         </div>
       </div>
