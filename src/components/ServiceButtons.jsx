@@ -15,21 +15,19 @@ import CompensationIcon from '../assets/icons/compensation.svg?react';
 
 const affiliateMarker = '661841';
 
-// We've re-added the 'href' property with the direct affiliate links
-// We've replaced the 'href' with the 'serviceKey' that matches our database
 const services = [
-  { label: 'Flights', Icon: FlightIcon, serviceKey: 'flights', colorClass: 'bg-orange-500' },
-  { label: 'Car Rentals', Icon: CarIcon, serviceKey: 'car-rentals', colorClass: 'bg-green-500' },
-  { label: 'Hotels', Icon: HotelIcon, serviceKey: 'hotels', colorClass: 'bg-blue-800' },
-  { label: 'Hostels', Icon: HostelIcon, serviceKey: 'hostels', colorClass: 'bg-violet-500' },
-  { label: 'Vacation Rentals', Icon: VacationIcon, serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500' },
-  { label: 'Airport Transfers', Icon: TransferIcon, serviceKey: 'airport-transfers', colorClass: 'bg-teal-500' },
-  { label: 'Trains & Buses', Icon: TrainIcon, serviceKey: 'trains-buses', colorClass: 'bg-red-500' },
-  { label: 'Tours & Activities', Icon: ToursIcon, serviceKey: 'tours-activities', colorClass: 'bg-yellow-500' },
-  { label: 'Yachts & Cruises', Icon: YachtIcon, serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500' },
-  { label: 'Travel Insurance', Icon: InsuranceIcon, serviceKey: 'travel-insurance', colorClass: 'bg-rose-500' },
-  { label: 'eSIM Cards', Icon: EsimIcon, serviceKey: 'esim-cards', colorClass: 'bg-lime-500' },
-  { label: 'Flight Compensation', Icon: CompensationIcon, serviceKey: 'flight-compensation', colorClass: 'bg-fuchsia-500' },
+    { label: 'Flights', Icon: FlightIcon, to: '/flights', colorClass: 'bg-orange-500' },
+    { label: 'Car Rentals', Icon: CarIcon, to: '/cars', colorClass: 'bg-green-500' },
+    { label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800' },
+    { label: 'Hostels', Icon: HostelIcon, to: '/hostels', colorClass: 'bg-violet-500' },
+    { label: 'Vacation Rentals', Icon: VacationIcon, to: '/vacation-rentals', colorClass: 'bg-sky-500' },
+    { label: 'Airport Transfers', Icon: TransferIcon, to: '/transfers', colorClass: 'bg-teal-500' },
+    { label: 'Trains & Buses', Icon: TrainIcon, to: '/trains-buses', colorClass: 'bg-red-500' },
+    { label: 'Tours & Activities', Icon: ToursIcon, to: '/activities', colorClass: 'bg-yellow-500' },
+    { label: 'Yachts & Cruises', Icon: YachtIcon, to: '/cruises', colorClass: 'bg-indigo-500' },
+    { label: 'Travel Insurance', Icon: InsuranceIcon, to: '/insurance', colorClass: 'bg-rose-500' },
+    { label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-lime-500' },
+    { label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500' },
 ];
 
 const ServiceButtons = () => {
@@ -42,8 +40,8 @@ const ServiceButtons = () => {
               key={service.label}
               label={service.label}
               IconComponent={service.Icon}
+              to={service.to} // Pass the 'to' prop
               colorClass={service.colorClass}
-              serviceKey={service.serviceKey} // Pass the serviceKey
             />
           ))}
         </div>
