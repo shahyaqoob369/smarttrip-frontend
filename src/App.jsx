@@ -1,13 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
+import ServicePageLayout from './components/ServicePageLayout'; // Import the new layout
 import ProtectedRoute from './components/ProtectedRoute';
+
+// Import Pages
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
-import HotelsPage from './pages/HotelsPage';
 
-// Import all the new service pages
+// Import all service pages
+import HotelsPage from './pages/HotelsPage';
 import FlightsPage from './pages/FlightsPage';
 import CarsPage from './pages/CarsPage';
 import HostelsPage from './pages/HostelsPage';
@@ -20,38 +23,33 @@ import InsurancePage from './pages/InsurancePage';
 import EsimPage from './pages/EsimPage';
 import CompensationPage from './pages/CompensationPage';
 
-
-function App() {
+const App = () => {
   return (
     <Routes>
-      {/* Public Routes with Main Layout */}
+      {/* --- Homepage uses the simple MainLayout (no header) --- */}
       <Route path="/" element={<MainLayout><HomePage /></MainLayout>} />
-      <Route path="/about" element={<MainLayout><AboutPage /></MainLayout>} />
       
-      {/* Service Pages with Main Layout */}
-      <Route path="/hotels" element={<MainLayout><HotelsPage /></MainLayout>} />
-      <Route path="/flights" element={<MainLayout><FlightsPage /></MainLayout>} />
-      <Route path="/cars" element={<MainLayout><CarsPage /></MainLayout>} />
-      <Route path="/hostels" element={<MainLayout><HostelsPage /></MainLayout>} />
-      <Route path="/vacation-rentals" element={<MainLayout><VacationRentalsPage /></MainLayout>} />
-      <Route path="/transfers" element={<MainLayout><TransfersPage /></MainLayout>} />
-      <Route path="/trains-buses" element={<MainLayout><TrainsBusesPage /></MainLayout>} />
-      <Route path="/activities" element={<MainLayout><ActivitiesPage /></MainLayout>} />
-      <Route path="/cruises" element={<MainLayout><CruisesPage /></MainLayout>} />
-      <Route path="/insurance" element={<MainLayout><InsurancePage /></MainLayout>} />
-      <Route path="/esim" element={<MainLayout><EsimPage /></MainLayout>} />
-      <Route path="/compensation" element={<MainLayout><CompensationPage /></MainLayout>} />
+      {/* --- ALL other pages use the new ServicePageLayout (with the small header) --- */}
+      <Route path="/about" element={<ServicePageLayout><AboutPage /></ServicePageLayout>} />
+      <Route path="/hotels" element={<ServicePageLayout><HotelsPage /></ServicePageLayout>} />
+      <Route path="/flights" element={<ServicePageLayout><FlightsPage /></ServicePageLayout>} />
+      <Route path="/cars" element={<ServicePageLayout><CarsPage /></ServicePageLayout>} />
+      <Route path="/hostels" element={<ServicePageLayout><HostelsPage /></ServicePageLayout>} />
+      <Route path="/vacation-rentals" element={<ServicePageLayout><VacationRentalsPage /></ServicePageLayout>} />
+      <Route path="/transfers" element={<ServicePageLayout><TransfersPage /></ServicePageLayout>} />
+      <Route path="/trains-buses" element={<ServicePageLayout><TrainsBusesPage /></ServicePageLayout>} />
+      <Route path="/activities" element={<ServicePageLayout><ActivitiesPage /></ServicePageLayout>} />
+      <Route path="/cruises" element={<ServicePageLayout><CruisesPage /></ServicePageLayout>} />
+      <Route path="/insurance" element={<ServicePageLayout><InsurancePage /></ServicePageLayout>} />
+      <Route path="/esim" element={<ServicePageLayout><EsimPage /></ServicePageLayout>} />
+      <Route path="/compensation" element={<ServicePageLayout><CompensationPage /></ServicePageLayout>} />
 
-      {/* Standalone Login Page */}
+      {/* --- Standalone Pages (no layout at all) --- */}
       <Route path="/login" element={<LoginPage />} />
-
-      {/* Protected Admin Route */}
-      <Route
-        path="/admin/dashboard"
-        element={ <ProtectedRoute> <DashboardPage /> </ProtectedRoute> }
-      />
+      <Route path="/admin/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
     </Routes>
   );
 }
 
 export default App;
+
