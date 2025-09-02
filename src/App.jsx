@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 // Import Pages
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 
@@ -28,9 +29,13 @@ const App = () => {
     <Routes>
       {/* --- Homepage uses the simple MainLayout (no header) --- */}
       <Route path="/" element={<MainLayout><HomePage /></MainLayout>} />
+
+
+      <Route path="/about" element={<ServicePageLayout><AboutPage /></ServicePageLayout>} />
+      <Route path="/contact" element={<ServicePageLayout><ContactPage /></ServicePageLayout>} /> {/* 2. Add the new route */}
+      
       
       {/* --- ALL other pages use the new ServicePageLayout (with the small header) --- */}
-      <Route path="/about" element={<ServicePageLayout><AboutPage /></ServicePageLayout>} />
       <Route path="/hotels" element={<ServicePageLayout><HotelsPage /></ServicePageLayout>} />
       <Route path="/flights" element={<ServicePageLayout><FlightsPage /></ServicePageLayout>} />
       <Route path="/cars" element={<ServicePageLayout><CarsPage /></ServicePageLayout>} />

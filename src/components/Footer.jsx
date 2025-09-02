@@ -12,6 +12,8 @@ const Footer = () => {
             <a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-white">Terms of Service</a>
             {/* Add the new link below */}
+            <Link to="/about" className="text-gray-400 hover:text-white">About Us</Link>
+            <Link to="/contact" className="text-gray-400 hover:text-white">Contact Us</Link>
             <Link to="/login" className="text-gray-400 hover:text-white">Admin Login</Link>
           </div>
         </div>
