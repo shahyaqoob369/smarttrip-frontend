@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ReactGA from 'react-ga4'; // 1. Import ReactGA
 
-// This is our new, intelligent component that can be either an internal link or an external redirect button.
 const ServiceButton = ({ service }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  // --- SCENARIO 2: DIRECT LINK (calls the backend) ---
+  // This is the function that sends the tracking data to Google Analytics
+  const trackEvent = () => {
+    ReactGA.event({
+      category: "Service Button Clicks",
+      action: `Clicked ${service.label}`,
+      label: service.type === 'widget' ? service.to : service.serviceKey,
+    });
+  };
+
   const handleDirectRedirect = async () => {
+    trackEvent(); // 2. Track the click for direct redirect buttons
     setIsLoading(true);
     try {
       const response = await fetch(`https://smarttrip-backend.onrender.com/redirect/${service.serviceKey}`);
@@ -23,11 +32,11 @@ const ServiceButton = ({ service }) => {
     }
   };
 
-  // --- SCENARIO 1: WIDGET PAGE (an internal link) ---
   if (service.type === 'widget') {
     return (
       <Link
         to={service.to}
+        onClick={trackEvent} // 3. Track the click for internal widget links
         className={`group flex flex-col items-center justify-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ${service.colorClass} hover:brightness-110`}
       >
         <service.Icon className="h-8 w-8 text-white" />
@@ -38,7 +47,6 @@ const ServiceButton = ({ service }) => {
     );
   }
 
-  // --- RENDER THE DIRECT LINK BUTTON ---
   return (
     <button
       onClick={handleDirectRedirect}

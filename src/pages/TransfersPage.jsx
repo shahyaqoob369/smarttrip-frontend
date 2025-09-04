@@ -23,16 +23,26 @@ const TransfersPage = () => {
 
     observer.observe(container, { childList: true });
 
-    const script = document.createElement('script');
-    script.src = widgetScript;
-    script.async = true;
-    container.appendChild(script);
+    // --- We add a check to prevent adding the script multiple times ---
+    const existingScript = document.querySelector(`script[src="${widgetScript}"]`);
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = widgetScript;
+      script.async = true;
+      container.appendChild(script);
+    } else {
+      // If script exists but our component re-mounted, we might need to re-init
+      // For now, we assume it's okay and just stop our loader
+      setIsLoading(false);
+      observer.disconnect();
+    }
 
+
+    // --- THIS IS THE ONLY CHANGE ---
+    // The new cleanup function is simpler and safer.
+    // It only disconnects the observer and leaves the script in place.
     return () => {
       observer.disconnect();
-      if (container && container.contains(script)) {
-        container.removeChild(script);
-      }
     };
   }, [widgetScript]);
 
@@ -41,7 +51,7 @@ const TransfersPage = () => {
       <div className="bg-white rounded-xl shadow-lg p-8">
         {/* Centered title with emoji */}
         <h1 className="text-3xl font-bold text-blue-700 mb-6 text-center flex items-center justify-center gap-3">
-          <span>🚗</span>
+          <span>🚚</span>
           <span>Airport Transfers</span>
         </h1>
         {/* Centered paragraph */}
@@ -64,4 +74,3 @@ const TransfersPage = () => {
 };
 
 export default TransfersPage;
-

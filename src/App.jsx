@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import ReactGA from "react-ga4"
 import MainLayout from './components/MainLayout';
 import ServicePageLayout from './components/ServicePageLayout'; // Import the new layout
 import ProtectedRoute from './components/ProtectedRoute';
@@ -23,6 +24,9 @@ import CruisesPage from './pages/CruisesPage';
 import InsurancePage from './pages/InsurancePage';
 import EsimPage from './pages/EsimPage';
 import CompensationPage from './pages/CompensationPage';
+
+const GA_MEASUREMENT_ID = "G-LWHZL75STX"; 
+ReactGA.initialize(GA_MEASUREMENT_ID);
 
 const App = () => {
   return (
