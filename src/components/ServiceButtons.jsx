@@ -1,5 +1,7 @@
 import React from 'react';
 import ServiceButton from './ServiceButton';
+
+// Icon Imports
 import HotelIcon from '../assets/icons/hotel.svg?react';
 import FlightIcon from '../assets/icons/flight.svg?react';
 import TrainIcon from '../assets/icons/train.svg?react';
@@ -13,21 +15,23 @@ import InsuranceIcon from '../assets/icons/insurance.svg?react';
 import EsimIcon from '../assets/icons/esim.svg?react';
 import CompensationIcon from '../assets/icons/compensation.svg?react';
 
-const affiliateMarker = '661841';
-
+// This is our new, definitive list of services with their types.
 const services = [
-    { label: 'Flights', Icon: FlightIcon, to: '/flights', colorClass: 'bg-orange-500' },
-    { label: 'Car Rentals', Icon: CarIcon, to: '/cars', colorClass: 'bg-green-500' },
-    { label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800' },
-    { label: 'Hostels', Icon: HostelIcon, to: '/hostels', colorClass: 'bg-violet-500' },
-    { label: 'Vacation Rentals', Icon: VacationIcon, to: '/vacation-rentals', colorClass: 'bg-sky-500' },
-    { label: 'Airport Transfers', Icon: TransferIcon, to: '/transfers', colorClass: 'bg-teal-500' },
-    { label: 'Trains & Buses', Icon: TrainIcon, to: '/trains-buses', colorClass: 'bg-red-500' },
-    { label: 'Tours & Activities', Icon: ToursIcon, to: '/activities', colorClass: 'bg-yellow-500' },
-    { label: 'Yachts & Cruises', Icon: YachtIcon, to: '/cruises', colorClass: 'bg-indigo-500' },
-    { label: 'Travel Insurance', Icon: InsuranceIcon, to: '/insurance', colorClass: 'bg-rose-500' },
-    { label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-lime-500' },
-    { label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500' },
+  // --- Services WITH an active widget ---
+  { type: 'widget', label: 'Flights', Icon: FlightIcon, to: '/flights', colorClass: 'bg-orange-500' },
+  { type: 'widget', label: 'Car Rentals', Icon: CarIcon, to: '/cars', colorClass: 'bg-green-500' },
+  { type: 'widget', label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800' },
+  { type: 'widget', label: 'Airport Transfers', Icon: TransferIcon, to: '/transfers', colorClass: 'bg-teal-500' },
+  { type: 'widget', label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-lime-500' },
+  { type: 'widget', label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500' },
+
+  // --- Services WITHOUT a widget (will be direct links) ---
+  { type: 'direct', label: 'Hostels', Icon: HostelIcon, serviceKey: 'hostels', colorClass: 'bg-violet-500' },
+  { type: 'direct', label: 'Vacation Rentals', Icon: VacationIcon, serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500' },
+  { type: 'direct', label: 'Trains & Buses', Icon: TrainIcon, serviceKey: 'trains-buses', colorClass: 'bg-red-500' },
+  { type: 'direct', label: 'Tours & Activities', Icon: ToursIcon, serviceKey: 'tours-activities', colorClass: 'bg-yellow-500' },
+  { type: 'direct', label: 'Yachts & Cruises', Icon: YachtIcon, serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500' },
+  { type: 'direct', label: 'Travel Insurance', Icon: InsuranceIcon, serviceKey: 'travel-insurance', colorClass: 'bg-rose-500' },
 ];
 
 const ServiceButtons = () => {
@@ -36,13 +40,7 @@ const ServiceButtons = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6">
           {services.map((service) => (
-            <ServiceButton
-              key={service.label}
-              label={service.label}
-              IconComponent={service.Icon}
-              to={service.to} // Pass the 'to' prop
-              colorClass={service.colorClass}
-            />
+            <ServiceButton key={service.label} service={service} />
           ))}
         </div>
       </div>
