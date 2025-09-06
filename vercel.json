@@ -1,0 +1,114 @@
+{
+  "redirects": [
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.smarttripdeal.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/:path",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "smarttripdeal.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/:path",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.bookhoteloffers.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/hotels",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "bookhoteloffers.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/hotels",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.booking5starshotel.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/hotels",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "booking5starshotel.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/hotels",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.cheap1flights.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/flights",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "cheap1flights.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/flights",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.rentalcarfacile.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/cars",
+      "permanent": true
+    },
+    {
+      "source": "/:path((?!well-known(?:/.*)?))",
+      "has": [
+        {
+          "type": "host",
+          "value": "rentalcarfacile.com"
+        }
+      ],
+      "destination": "https://smarttripdeals.com/cars",
+      "permanent": true
+    }
+  ]
+}
