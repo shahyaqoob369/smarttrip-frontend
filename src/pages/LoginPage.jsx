@@ -14,6 +14,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      // Use the apiUrl variable for the fetch request
       const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -23,10 +24,8 @@ const LoginPage = () => {
       if (!response.ok) throw new Error(data.message || 'Something went wrong');
       
       localStorage.setItem('token', data.token);
-      
-      // The alert is now removed, allowing the navigate function to run without interruption.
+      alert('Login successful!');
       navigate('/admin/dashboard');
-
     } catch (error) {
       alert(`Login Failed: ${error.message}`);
     }
