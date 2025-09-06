@@ -9,10 +9,20 @@ const DashboardPage = () => {
   const [editingSupplier, setEditingSupplier] = useState(null);
   const navigate = useNavigate();
 
-  // 1. Get the correct API URL from our environment variables
   const apiUrl = import.meta.env.VITE_API_URL;
 
-  // This function now fetches from the correct live or local backend
+  // 1. We define a list of the services that are managed by internal widgets.
+  // The links for these services should not be editable by the client.
+  const widgetServices = [
+    'flights',
+    'car-rentals',
+    'hotels',
+    'airport-transfers',
+    'esim-cards',
+    'flight-compensation',
+    'hostels', // Added based on our recent implementation
+  ];
+
   const fetchSuppliers = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -20,7 +30,6 @@ const DashboardPage = () => {
       return;
     }
     try {
-      // 2. Use the apiUrl variable for the fetch request
       const response = await fetch(`${apiUrl}/api/admin/suppliers`, {
         headers: { 'x-auth-token': token },
       });
@@ -38,7 +47,7 @@ const DashboardPage = () => {
 
   useEffect(() => {
     fetchSuppliers();
-  }, [navigate, apiUrl]); // Added apiUrl as a dependency
+  }, [navigate, apiUrl]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -56,7 +65,6 @@ const DashboardPage = () => {
     const newUrl = e.target.elements.url.value;
 
     try {
-      // 3. Use the apiUrl variable for the update request
       const response = await fetch(`${apiUrl}/api/admin/suppliers/${editingSupplier.id}`, {
         method: 'PUT',
         headers: {
@@ -68,7 +76,7 @@ const DashboardPage = () => {
 
       if (!response.ok) throw new Error('Failed to update supplier');
       
-      await fetchSuppliers(); // Use await to ensure data is fresh
+      await fetchSuppliers();
       setIsModalOpen(false);
       
     } catch (error) {
@@ -93,22 +101,27 @@ const DashboardPage = () => {
           <table className="min-w-full bg-white rounded-lg shadow">
             <thead>
               <tr className="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                <th className="py-3 px-6 text-left">ID</th>
                 <th className="py-3 px-6 text-left">Label</th>
-                <th className="py-3 px-6 text-left">URL</th>
+                <th className="py-3 px-6 text-left">URL / Destination</th>
                 <th className="py-3 px-6 text-center">Actions</th>
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
               {suppliers.map(supplier => (
                 <tr key={supplier.id} className="border-b border-gray-200 hover:bg-gray-100">
-                  <td className="py-3 px-6 text-left">{supplier.id}</td>
-                  <td className="py-3 px-6 text-left">{supplier.label}</td>
+                  <td className="py-3 px-6 text-left font-medium">{supplier.label}</td>
                   <td className="py-3 px-6 text-left break-all">{supplier.url}</td>
                   <td className="py-3 px-6 text-center">
-                    <button onClick={() => handleEditClick(supplier)} className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">
-                      Edit
-                    </button>
+                    {/* 2. Here is the new conditional logic */}
+                    {widgetServices.includes(supplier.service_key) ? (
+                      // If the service is in our widget list, show a message
+                      <span className="text-xs text-gray-500 italic">Managed by Widget</span>
+                    ) : (
+                      // Otherwise, show the functional Edit button
+                      <button onClick={() => handleEditClick(supplier)} className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">
+                        Edit
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -128,3 +141,4 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
