@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EditModal from '../components/EditModal';
-import AppLogo from '../assets/app-logo.svg';
 
 const DashboardPage = () => {
   const [suppliers, setSuppliers] = useState([]);
@@ -12,6 +11,8 @@ const DashboardPage = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL;
 
+  // 1. We define a list of the services that are managed by internal widgets.
+  // The links for these services should not be editable by the client.
   const widgetServices = [
     'flights',
     'car-rentals',
@@ -88,11 +89,6 @@ const DashboardPage = () => {
   return (
     <>
       <div className="p-8 max-w-7xl mx-auto">
-        {/* 2. Add the logo and center it */}
-        <div className="flex justify-center mb-6">
-          <img src={AppLogo} alt="App Logo" className="h-16" /> {/* Adjust h-16 as needed for size */}
-        </div>
-
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Admin Dashboard</h1>
           <button onClick={handleLogout} className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-600">
@@ -115,9 +111,12 @@ const DashboardPage = () => {
                   <td className="py-3 px-6 text-left font-medium">{supplier.label}</td>
                   <td className="py-3 px-6 text-left break-all">{supplier.url}</td>
                   <td className="py-3 px-6 text-center">
+                    {/* 2. Here is the new conditional logic */}
                     {widgetServices.includes(supplier.service_key) ? (
+                      // If the service is in our widget list, show a message
                       <span className="text-xs text-gray-500 italic">Managed by Widget</span>
                     ) : (
+                      // Otherwise, show the functional Edit button
                       <button onClick={() => handleEditClick(supplier)} className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">
                         Edit
                       </button>
