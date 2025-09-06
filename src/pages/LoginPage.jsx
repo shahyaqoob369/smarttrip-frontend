@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,28 +8,24 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  // Get the API URL from the environment variable
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent the form from reloading the page
+    e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
+      // Use the apiUrl variable for the fetch request
+      const response = await fetch(`${apiUrl}/api/auth/login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       });
-
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
-      }
+      if (!response.ok) throw new Error(data.message || 'Something went wrong');
       
-      // If login is successful, save the token and redirect
       localStorage.setItem('token', data.token);
       alert('Login successful!');
-      navigate('/admin/dashboard'); // Redirect to the future admin dashboard
-
+      navigate('/admin/dashboard');
     } catch (error) {
       alert(`Login Failed: ${error.message}`);
     }

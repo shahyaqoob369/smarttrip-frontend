@@ -25,6 +25,7 @@ import InsurancePage from './pages/InsurancePage';
 import EsimPage from './pages/EsimPage';
 import CompensationPage from './pages/CompensationPage';
 
+// Initialize Google Analytics
 const GA_MEASUREMENT_ID = "G-LWHZL75STX"; 
 ReactGA.initialize(GA_MEASUREMENT_ID);
 

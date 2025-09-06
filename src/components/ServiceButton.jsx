@@ -1,74 +1,130 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import ReactGA from 'react-ga4'; // 1. Import ReactGA
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import EditModal from '../components/EditModal';
 
-const ServiceButton = ({ service }) => {
-  const [isLoading, setIsLoading] = useState(false);
+const DashboardPage = () => {
+  const [suppliers, setSuppliers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingSupplier, setEditingSupplier] = useState(null);
+  const navigate = useNavigate();
 
-  // This is the function that sends the tracking data to Google Analytics
-  const trackEvent = () => {
-    ReactGA.event({
-      category: "Service Button Clicks",
-      action: `Clicked ${service.label}`,
-      label: service.type === 'widget' ? service.to : service.serviceKey,
-    });
-  };
+  // 1. Get the correct API URL from our environment variables
+  const apiUrl = import.meta.env.VITE_API_URL;
 
-  const handleDirectRedirect = async () => {
-    trackEvent(); // 2. Track the click for direct redirect buttons
-    setIsLoading(true);
+  // This function now fetches from the correct live or local backend
+  const fetchSuppliers = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
     try {
-      const response = await fetch(`https://smarttrip-backend.onrender.com/redirect/${service.serviceKey}`);
-      if (!response.ok) {
-        throw new Error('Service not found');
-      }
+      // 2. Use the apiUrl variable for the fetch request
+      const response = await fetch(`${apiUrl}/api/admin/suppliers`, {
+        headers: { 'x-auth-token': token },
+      });
+      if (!response.ok) throw new Error('Failed to fetch suppliers');
       const data = await response.json();
-      window.open(data.url, '_blank', 'noopener,noreferrer');
+      setSuppliers(data);
     } catch (error) {
-      console.error("Failed to redirect:", error);
-      alert("Sorry, we couldn't find the link for that service.");
+      console.error(error);
+      localStorage.removeItem('token');
+      navigate('/login');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  if (service.type === 'widget') {
-    return (
-      <Link
-        to={service.to}
-        onClick={trackEvent} // 3. Track the click for internal widget links
-        className={`group flex flex-col items-center justify-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ${service.colorClass} hover:brightness-110`}
-      >
-        <service.Icon className="h-8 w-8 text-white" />
-        <span className="mt-2 text-sm font-semibold text-white text-center">
-          {service.label}
-        </span>
-      </Link>
-    );
-  }
+  useEffect(() => {
+    fetchSuppliers();
+  }, [navigate, apiUrl]); // Added apiUrl as a dependency
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
+  const handleEditClick = (supplier) => {
+    setEditingSupplier(supplier);
+    setIsModalOpen(true);
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const newUrl = e.target.elements.url.value;
+
+    try {
+      // 3. Use the apiUrl variable for the update request
+      const response = await fetch(`${apiUrl}/api/admin/suppliers/${editingSupplier.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': token,
+        },
+        body: JSON.stringify({ url: newUrl }),
+      });
+
+      if (!response.ok) throw new Error('Failed to update supplier');
+      
+      await fetchSuppliers(); // Use await to ensure data is fresh
+      setIsModalOpen(false);
+      
+    } catch (error) {
+      console.error(error);
+      alert('Failed to save changes.');
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
-    <button
-      onClick={handleDirectRedirect}
-      disabled={isLoading}
-      className={`group flex flex-col items-center justify-center p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : 'hover:brightness-110'}`}
-    >
-      {isLoading ? (
-        <>
-          <svg className="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-          <span className="mt-2 text-xs font-semibold text-white text-center">Loading...</span>
-        </>
-      ) : (
-        <>
-          <service.Icon className="h-8 w-8 text-white" />
-          <span className="mt-2 text-sm font-semibold text-white text-center">
-            {service.label}
-          </span>
-        </>
-      )}
-    </button>
+    <>
+      <div className="p-8 max-w-7xl mx-auto">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          <button onClick={handleLogout} className="bg-red-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-red-600">
+            Log Out
+          </button>
+        </div>
+        
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white rounded-lg shadow">
+            <thead>
+              <tr className="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th className="py-3 px-6 text-left">ID</th>
+                <th className="py-3 px-6 text-left">Label</th>
+                <th className="py-3 px-6 text-left">URL</th>
+                <th className="py-3 px-6 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="text-gray-600 text-sm font-light">
+              {suppliers.map(supplier => (
+                <tr key={supplier.id} className="border-b border-gray-200 hover:bg-gray-100">
+                  <td className="py-3 px-6 text-left">{supplier.id}</td>
+                  <td className="py-3 px-6 text-left">{supplier.label}</td>
+                  <td className="py-3 px-6 text-left break-all">{supplier.url}</td>
+                  <td className="py-3 px-6 text-center">
+                    <button onClick={() => handleEditClick(supplier)} className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <EditModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        supplier={editingSupplier}
+        onSave={handleSave}
+      />
+    </>
   );
 };
 
-export default ServiceButton;
-
+export default DashboardPage;
