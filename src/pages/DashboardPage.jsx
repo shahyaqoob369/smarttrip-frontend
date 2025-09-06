@@ -20,7 +20,6 @@ const DashboardPage = () => {
     'airport-transfers',
     'esim-cards',
     'flight-compensation',
-    'hostels', // Added based on our recent implementation
   ];
 
   const fetchSuppliers = async () => {
