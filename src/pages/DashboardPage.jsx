@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EditModal from '../components/EditModal'; // Import our new modal component
+import EditModal from '../components/EditModal';
 
 const DashboardPage = () => {
   const [suppliers, setSuppliers] = useState([]);
@@ -9,6 +9,10 @@ const DashboardPage = () => {
   const [editingSupplier, setEditingSupplier] = useState(null);
   const navigate = useNavigate();
 
+  // 1. Get the correct API URL from our environment variables
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  // This function now fetches from the correct live or local backend
   const fetchSuppliers = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -16,7 +20,8 @@ const DashboardPage = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:3000/api/admin/suppliers', {
+      // 2. Use the apiUrl variable for the fetch request
+      const response = await fetch(`${apiUrl}/api/admin/suppliers`, {
         headers: { 'x-auth-token': token },
       });
       if (!response.ok) throw new Error('Failed to fetch suppliers');
@@ -33,27 +38,26 @@ const DashboardPage = () => {
 
   useEffect(() => {
     fetchSuppliers();
-  }, [navigate]);
+  }, [navigate, apiUrl]); // Added apiUrl as a dependency
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
   };
 
-  // Function to open the modal
   const handleEditClick = (supplier) => {
     setEditingSupplier(supplier);
     setIsModalOpen(true);
   };
 
-  // Function to save the changes
   const handleSave = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     const newUrl = e.target.elements.url.value;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/admin/suppliers/${editingSupplier.id}`, {
+      // 3. Use the apiUrl variable for the update request
+      const response = await fetch(`${apiUrl}/api/admin/suppliers/${editingSupplier.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -64,9 +68,8 @@ const DashboardPage = () => {
 
       if (!response.ok) throw new Error('Failed to update supplier');
       
-      // Refresh the supplier list to show the change
-      fetchSuppliers();
-      setIsModalOpen(false); // Close the modal
+      await fetchSuppliers(); // Use await to ensure data is fresh
+      setIsModalOpen(false);
       
     } catch (error) {
       console.error(error);
@@ -88,7 +91,6 @@ const DashboardPage = () => {
         
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white rounded-lg shadow">
-            {/* ... (table head remains the same) */}
             <thead>
               <tr className="w-full bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                 <th className="py-3 px-6 text-left">ID</th>
@@ -104,7 +106,6 @@ const DashboardPage = () => {
                   <td className="py-3 px-6 text-left">{supplier.label}</td>
                   <td className="py-3 px-6 text-left break-all">{supplier.url}</td>
                   <td className="py-3 px-6 text-center">
-                    {/* Update the button to open the modal */}
                     <button onClick={() => handleEditClick(supplier)} className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600">
                       Edit
                     </button>
@@ -116,7 +117,6 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      {/* The Modal component is here, but hidden until isModalOpen is true */}
       <EditModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
