@@ -1,7 +1,19 @@
-import {React} from 'react';
-import { Link } from 'react-router-dom';
-import ReactGA from 'react-ga4';
-import { motion } from 'framer-motion';
+import React from 'react';
+import ServiceButton from './ServiceButton';
+
+// Icon Imports
+import HotelIcon from '../assets/icons/hotel.svg?react';
+import FlightIcon from '../assets/icons/flight.svg?react';
+import TrainIcon from '../assets/icons/train.svg?react';
+import CarIcon from '../assets/icons/car.svg?react';
+import TransferIcon from '../assets/icons/transfer.svg?react';
+import ToursIcon from '../assets/icons/tours.svg?react';
+import VacationIcon from '../assets/icons/vacation.svg?react';
+import HostelIcon from '../assets/icons/hostel.svg?react';
+import YachtIcon from '../assets/icons/yacht.svg?react';
+import InsuranceIcon from '../assets/icons/insurance.svg?react';
+import EsimIcon from '../assets/icons/esim.svg?react';
+import CompensationIcon from '../assets/icons/compensation.svg?react';
 
 // This is our new, definitive list of services with their types.
 const services = [
