@@ -45,7 +45,6 @@ const App = () => {
         <Routes>
           {/* --- Homepage uses the simple MainLayout (no header) --- */}
           <Route path="/" element={<MainLayout><HomePage /></MainLayout>} />
-
           <Route path="/partner/:serviceKey" element={<ServicePageLayout><PartnerPage /></ServicePageLayout>} />
 
     
