@@ -15,8 +15,9 @@ import InsuranceIcon from '../assets/icons/insurance.svg?react';
 import EsimIcon from '../assets/icons/esim.svg?react';
 import CompensationIcon from '../assets/icons/compensation.svg?react';
 
+// This is our new, definitive list of services with their types.
 const services = [
-  // --- Top 6 Buttons (No Change) ---
+  // --- Services WITH an active widget ---
   { type: 'widget', label: 'Flights', Icon: FlightIcon, to: '/flights', colorClass: 'bg-orange-500' },
   { type: 'widget', label: 'Car Rentals', Icon: CarIcon, to: '/cars', colorClass: 'bg-green-500' },
   { type: 'widget', label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800' },
@@ -24,15 +25,12 @@ const services = [
   { type: 'widget', label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-lime-500' },
   { type: 'widget', label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500' },
 
-  // --- MODIFICATION: Bottom 6 Buttons now use 'iframe' type ---
-  // These will now open inside our app's layout.
-  { type: 'iframe', label: 'Hostels', Icon: HostelIcon, to: '/partner/hostels', serviceKey: 'hostels', colorClass: 'bg-violet-500' },
-  { type: 'iframe', label: 'Vacation Rentals', Icon: VacationIcon, to: '/partner/vacation-rentals', serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500' },
-  { type: 'iframe', label: 'Trains & Buses', Icon: TrainIcon, to: '/partner/trains-buses', serviceKey: 'trains-buses', colorClass: 'bg-red-500' },
-  { type: 'iframe', label: 'Tours & Activities', Icon: ToursIcon, to: '/partner/tours-activities', serviceKey: 'tours-activities', colorClass: 'bg-yellow-500' },
-  { type: 'iframe', label: 'Yachts & Cruises', Icon: YachtIcon, to: '/partner/yachts-cruises', serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500' },
-  
-  // --- FALLBACK EXAMPLE: This button will still open in a new tab ---
+  // --- Services WITHOUT a widget (will be direct links) ---
+  { type: 'direct', label: 'Hostels', Icon: HostelIcon, serviceKey: 'hostels', colorClass: 'bg-violet-500' },
+  { type: 'direct', label: 'Vacation Rentals', Icon: VacationIcon, serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500' },
+  { type: 'direct', label: 'Trains & Buses', Icon: TrainIcon, serviceKey: 'trains-buses', colorClass: 'bg-red-500' },
+  { type: 'direct', label: 'Tours & Activities', Icon: ToursIcon, serviceKey: 'tours-activities', colorClass: 'bg-yellow-500' },
+  { type: 'direct', label: 'Yachts & Cruises', Icon: YachtIcon, serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500' },
   { type: 'direct', label: 'Travel Insurance', Icon: InsuranceIcon, serviceKey: 'travel-insurance', colorClass: 'bg-rose-500' },
 ];
 
