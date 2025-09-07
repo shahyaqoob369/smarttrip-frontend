@@ -26,7 +26,6 @@ import CruisesPage from './pages/CruisesPage';
 import InsurancePage from './pages/InsurancePage';
 import EsimPage from './pages/EsimPage';
 import CompensationPage from './pages/CompensationPage';
-import PartnerPage from './pages/PartnerPage';
 
 // Initialize Google Analytics
 const GA_MEASUREMENT_ID = "G-LWHZL75STX"; 
@@ -45,9 +44,6 @@ const App = () => {
         <Routes>
           {/* --- Homepage uses the simple MainLayout (no header) --- */}
           <Route path="/" element={<MainLayout><HomePage /></MainLayout>} />
-
-          <Route path="/partner/:serviceKey" element={<ServicePageLayout><PartnerPage /></ServicePageLayout>} />
-
     
           {/* --- ALL other pages use the new ServicePageLayout (with the small header) --- */}
           <Route path="/about" element={<ServicePageLayout><AboutPage /></ServicePageLayout>} />
