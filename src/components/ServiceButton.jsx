@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // 1. Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import ReactGA from 'react-ga4';
-import { motion, useAnimationControls } from 'framer-motion'; // 2. Import useAnimationControls
+import { motion, useAnimationControls } from 'framer-motion';
 
 const ServiceButton = ({ service }) => {
   const [isLoading, setIsLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
-  const navigate = useNavigate(); // Hook for programmatic navigation
-  const iconControls = useAnimationControls(); // 3. Create animation controls for the icon
+  const navigate = useNavigate();
+  const iconControls = useAnimationControls();
 
   const trackEvent = () => {
     ReactGA.event({
@@ -17,21 +17,24 @@ const ServiceButton = ({ service }) => {
     });
   };
 
-  // 4. Create a new handler to manage the animation-then-navigation sequence
   const handleAnimatedClick = async (e) => {
-    // For Links, prevent immediate navigation
     e.preventDefault();
     trackEvent();
 
-    // Start the icon wobble animation and wait for it to finish
+    // --- MODIFICATION: New Fly-Out Animation Sequence ---
     await iconControls.start({
-      rotate: [0, -15, 15, -15, 15, 0], // A quick wobble effect
-      transition: { duration: 0.6, ease: "easeInOut" },
+      x: [0, 10, -150],     // Keyframes: Stay, move right a bit, then shoot off to the left
+      opacity: [1, 1, 0],   // Keyframes: Stay visible, then fade out as it exits
+      transition: { 
+        duration: 0.7, 
+        ease: "easeInOut",
+        times: [0, 0.2, 1] // Controls timing: 20% for the move right, 80% for the exit
+      },
     });
 
     // --- After animation, proceed with the original action ---
     if (service.type === 'widget' || service.type === 'iframe') {
-      navigate(service.to); // Navigate to internal page
+      navigate(service.to);
     } else if (service.type === 'direct') {
       setIsLoading(true);
       try {
@@ -56,7 +59,6 @@ const ServiceButton = ({ service }) => {
         </>
       ) : (
         <>
-          {/* 5. Wrap the Icon in a motion component linked to our controls */}
           <motion.div animate={iconControls}>
             <service.Icon className="h-8 w-8 text-white" />
           </motion.div>
@@ -68,7 +70,6 @@ const ServiceButton = ({ service }) => {
     </>
   );
 
-  // We can combine the return logic since the wrapper is the same
   return (
     <motion.div
       className="w-full h-full"
@@ -80,15 +81,17 @@ const ServiceButton = ({ service }) => {
         <button
           onClick={handleAnimatedClick}
           disabled={isLoading}
-          className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+          // --- MODIFICATION: Added overflow-hidden to clip the icon ---
+          className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
         >
           {buttonContent}
         </button>
       ) : (
         <Link
           to={service.to}
-          onClick={handleAnimatedClick} // 6. Use the new handler here
-          className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 ${service.colorClass}`}
+          onClick={handleAnimatedClick}
+          // --- MODIFICATION: Added overflow-hidden to clip the icon ---
+          className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden ${service.colorClass}`}
         >
           {buttonContent}
         </Link>
@@ -98,6 +101,7 @@ const ServiceButton = ({ service }) => {
 };
 
 export default ServiceButton;
+
 
 
 
