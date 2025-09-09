@@ -1,30 +1,51 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Lottie from 'lottie-react'; // 1. Import the Lottie component
 
-// This component renders a full-screen intro animation.
-// The onAnimationComplete prop is a function that will be called when the animation finishes.
+// 2. Import the Lottie JSON animation file
+import planeAnimationData from '../assets/animations/plane.json';
+
 const IntroAnimation = ({ onAnimationComplete }) => {
   return (
-    // This is the full-screen container for the animation
     <motion.div
       className="fixed inset-0 bg-brand-blue flex items-center justify-center z-50"
       initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }} // Animate the entire container to fade out
-      transition={{ duration: 0.5, delay: 2.5 }} // Fade out after a 2.5s delay
-      onAnimationComplete={onAnimationComplete} // Call the function when fade-out is done
+      animate={{ opacity: 0 }}
+      transition={{ duration: 0.5, delay: 2.5 }}
+      onAnimationComplete={onAnimationComplete}
     >
-      {/* This is the logo that will animate */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }} // Start invisible and small
-        animate={{ opacity: 1, scale: 1 }} // Animate to visible and normal size
-        transition={{ duration: 1, ease: "easeOut" }} // Define the animation properties
-      >
-        <h1 className="text-5xl lg:text-7xl font-bold text-white">
-          <span className="text-white">Smart</span>
-          <span className="text-orange-400">Trip</span>
-          <span className="text-white">Deals</span>
-        </h1>
-      </motion.div>
+      {/* Container for layering the animations */}
+      <div className="relative w-full h-full flex items-center justify-center">
+        
+        {/* 3. Lottie Plane Animation (Back Layer) */}
+        <motion.div 
+          className="absolute z-0" // Positioned behind the logo
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2 }} // Fades in slightly after start
+        >
+          <Lottie 
+            animationData={planeAnimationData} 
+            loop={false} 
+            style={{ width: 400, height: 400 }} // Adjust size as needed
+          />
+        </motion.div>
+
+        {/* 4. Logo Animation (Front Layer) */}
+        <motion.div
+          className="relative z-10" // z-10 ensures it's on top of the plane (z-0)
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          <h1 className="text-5xl lg:text-7xl font-bold text-white">
+            <span className="text-white">Smart</span>
+            <span className="text-orange-400">Trip</span>
+            <span className="text-white">Deals</span>
+          </h1>
+        </motion.div>
+
+      </div>
     </motion.div>
   );
 };
