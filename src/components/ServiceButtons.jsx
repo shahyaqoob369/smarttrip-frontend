@@ -19,17 +19,17 @@ import CompensationIcon from '../assets/icons/compensation.svg?react';
 const services = [
   { type: 'widget', label: 'Flights', Icon: FlightIcon, to: '/flights', colorClass: 'bg-orange-500', animationType: 'fly-away' },
   { type: 'widget', label: 'Car Rentals', Icon: CarIcon, to: '/cars', colorClass: 'bg-green-500', animationType: 'shake-and-shrink' },
-  { type: 'widget', label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800', animationType: 'spin' }, // Was 'wipe'
+  { type: 'widget', label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800', animationType: 'spin' },
   { type: 'widget', label: 'Airport Transfers', Icon: TransferIcon, to: '/transfers', colorClass: 'bg-teal-500', animationType: 'fly-away' },
   { type: 'widget', label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-lime-500', animationType: 'coin-flip' },
   { type: 'widget', label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500', animationType: 'bounce' },
-
-  // --- MODIFIED ANIMATIONS AS PER YOUR REQUEST ---
-  { type: 'iframe', label: 'Hostels', Icon: HostelIcon, to: '/partner/hostels', serviceKey: 'hostels', colorClass: 'bg-violet-500', animationType: 'bounce' },
-  { type: 'iframe', label: 'Vacation Rentals', Icon: VacationIcon, to: '/partner/vacation-rentals', serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500', animationType: 'fly-away-diagonal' },
-  { type: 'iframe', label: 'Trains & Buses', Icon: TrainIcon, to: '/partner/trains-buses', serviceKey: 'trains-buses', colorClass: 'bg-red-500', animationType: 'come-forward' },
-  { type: 'iframe', label: 'Tours & Activities', Icon: ToursIcon, to: '/partner/tours-activities', serviceKey: 'tours-activities', colorClass: 'bg-yellow-500', animationType: 'swim-across' },
-  { type: 'iframe', label: 'Yachts & Cruises', Icon: YachtIcon, to: '/partner/yachts-cruises', serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500', animationType: 'fly-away' },
+  
+  // NOTE: These are now all 'direct' types as per your project's data structure.
+  { type: 'direct', label: 'Hostels', Icon: HostelIcon, serviceKey: 'hostels', colorClass: 'bg-violet-500', animationType: 'bounce' },
+  { type: 'direct', label: 'Vacation Rentals', Icon: VacationIcon, serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500', animationType: 'fly-away-diagonal' },
+  { type: 'direct', label: 'Trains & Buses', Icon: TrainIcon, serviceKey: 'trains-buses', colorClass: 'bg-red-500', animationType: 'come-forward' },
+  { type: 'direct', label: 'Tours & Activities', Icon: ToursIcon, serviceKey: 'tours-activities', colorClass: 'bg-yellow-500', animationType: 'swim-across' },
+  { type: 'direct', label: 'Yachts & Cruises', Icon: YachtIcon, serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500', animationType: 'fly-away' },
   { type: 'direct', label: 'Travel Insurance', Icon: InsuranceIcon, serviceKey: 'travel-insurance', colorClass: 'bg-rose-500', animationType: 'spin' },
 ];
 
