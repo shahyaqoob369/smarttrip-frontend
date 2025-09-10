@@ -17,7 +17,7 @@ const ServiceButton = ({ service }) => {
     });
   };
 
-  cconst runAnimation = async () => {
+  const runAnimation = async () => {
     trackEvent();
     let animationPromise;
     switch (service.animationType) {
