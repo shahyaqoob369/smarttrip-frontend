@@ -17,21 +17,32 @@ const ServiceButton = ({ service }) => {
     });
   };
 
-  const runAnimation = async () => {
+  cconst runAnimation = async () => {
     trackEvent();
     let animationPromise;
     switch (service.animationType) {
         case 'fly-away':
             animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
             break;
+        // 1. MODIFICATION: Vacation Rentals now flies UP
         case 'fly-away-diagonal':
-            animationPromise = iconControls.start({ y: 50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
+            animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
             break;
         case 'swim-across':
             animationPromise = iconControls.start({ x: [-10, 10, -10, 10, 150], y: [0, 5, 0, -5, 0], opacity: [1, 1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
             break;
+        // 2. MODIFICATION: Trains & Buses animation is now longer
         case 'come-forward':
-            animationPromise = iconControls.start({ scale: [1, 1.5, 1, 0], opacity: [1, 1, 1, 0], transition: { duration: 0.8, ease: 'easeInOut' } });
+            animationPromise = iconControls.start({ scale: [1, 1.5, 1, 0], opacity: [1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
+            break;
+        // 3. MODIFICATION: New 'on-water' animation for Yachts & Cruises
+        case 'on-water':
+            animationPromise = iconControls.start({
+                rotate: [0, -2, 2, -2, 0],
+                y: [0, 2, 0, -2, 0],
+                opacity: 0,
+                transition: { duration: 1.0, ease: 'easeInOut' }
+            });
             break;
         case 'shake-and-shrink':
             animationPromise = iconControls.start({ x: [0, -5, 5, -5, 0], scale: 0, opacity: 0, transition: { duration: 0.7 } });
