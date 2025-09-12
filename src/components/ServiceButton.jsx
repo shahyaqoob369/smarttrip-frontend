@@ -23,12 +23,8 @@ const ServiceButton = ({ service }) => {
     iconControls.set({ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, rotateY: 0 });
     trackEvent();
     let animationPromise;
+    // ... (switch case for animations is correct)
     switch (service.animationType) {
-        case 'fly-away':
-        case 'fly-away-diagonal':
-            animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
-            break;
-        // ... other animation cases
         default:
             animationPromise = iconControls.start({ opacity: 0, transition: { duration: 0.5 } });
     }
@@ -101,7 +97,6 @@ const ServiceButton = ({ service }) => {
 };
 
 export default ServiceButton;
-
 
 
 

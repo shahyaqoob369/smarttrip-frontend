@@ -10,11 +10,12 @@ export const VideoPlayerProvider = ({ children }) => {
     isPlaying: false,
   });
   
-  // Use a ref to store the callback. This is more stable than state for functions.
+  // Use a ref to store the callback. This is the key to the fix.
+  // A ref is a stable container that persists across re-renders.
   const onEndedCallback = useRef(null);
 
   const playVideo = (src, onEnded) => {
-    // Store the function to be called when the video ends
+    // Store the function to be called when the video ends in the ref
     onEndedCallback.current = onEnded;
     setVideoState({
       src: src,
@@ -23,7 +24,7 @@ export const VideoPlayerProvider = ({ children }) => {
   };
 
   const stopVideo = () => {
-    // If a callback exists, execute it
+    // If a callback exists in the ref, execute it
     if (onEndedCallback.current) {
       onEndedCallback.current();
     }
