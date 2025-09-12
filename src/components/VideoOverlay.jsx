@@ -19,7 +19,7 @@ const VideoOverlay = ({ videoSrc, onVideoEnd }) => {
             muted
             playsInline
             onEnded={onVideoEnd}
-            className="w-full h-full object-cover"
+            className="max-w-full max-h-full"
           />
         </motion.div>
       )}
