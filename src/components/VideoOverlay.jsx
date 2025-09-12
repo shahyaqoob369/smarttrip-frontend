@@ -13,14 +13,14 @@ const VideoOverlay = ({ videoSrc, onVideoEnd }) => {
           transition={{ duration: 0.3 }}
         >
           <video
-            key={videoSrc}
-            src={videoSrc}
-            autoPlay
-            muted
-            playsInline
-            onEnded={onVideoEnd}
-            className="max-w-full max-h-full"
-          />
+  src={videoState.src}
+  autoPlay
+  muted
+  playsInline
+  onEnded={stopVideo}
+  className="max-w-full max-h-full"
+/>
+
         </motion.div>
       )}
     </AnimatePresence>
