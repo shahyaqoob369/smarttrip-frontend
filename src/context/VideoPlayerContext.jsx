@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useRef } from 'react';
 
 const VideoPlayerContext = createContext();
 
@@ -8,22 +8,28 @@ export const VideoPlayerProvider = ({ children }) => {
   const [videoState, setVideoState] = useState({
     src: null,
     isPlaying: false,
-    onEndedCallback: null,
   });
+  
+  // Use a ref to store the callback. This is more stable than state for functions.
+  const onEndedCallback = useRef(null);
 
   const playVideo = (src, onEnded) => {
+    // Store the function to be called when the video ends
+    onEndedCallback.current = onEnded;
     setVideoState({
       src: src,
       isPlaying: true,
-      onEndedCallback: onEnded,
     });
   };
 
   const stopVideo = () => {
-    if (videoState.onEndedCallback) {
-      videoState.onEndedCallback();
+    // If a callback exists, execute it
+    if (onEndedCallback.current) {
+      onEndedCallback.current();
     }
-    setVideoState({ src: null, isPlaying: false, onEndedCallback: null });
+    // Reset the state and the ref
+    setVideoState({ src: null, isPlaying: false });
+    onEndedCallback.current = null;
   };
 
   const value = { playVideo, stopVideo, videoState };
