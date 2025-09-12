@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 import { motion, useAnimationControls } from 'framer-motion';
+import { useVideoPlayer } from '../context/VideoPlayerContext';
 
 const ServiceButton = ({ service }) => {
   const [isLoading, setIsLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const iconControls = useAnimationControls();
+  const { playVideo } = useVideoPlayer();
 
   const trackEvent = () => {
     ReactGA.event({
@@ -18,31 +20,23 @@ const ServiceButton = ({ service }) => {
   };
 
   const runAnimation = async () => {
+    // Reset the icon to be visible before starting any new animation
+    iconControls.set({ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, rotateY: 0 });
     trackEvent();
     let animationPromise;
     switch (service.animationType) {
         case 'fly-away':
-            animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
-            break;
-        // 1. MODIFICATION: Vacation Rentals now flies UP
         case 'fly-away-diagonal':
             animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
             break;
         case 'swim-across':
             animationPromise = iconControls.start({ x: [-10, 10, -10, 10, 150], y: [0, 5, 0, -5, 0], opacity: [1, 1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
             break;
-        // 2. MODIFICATION: Trains & Buses animation is now longer
         case 'come-forward':
             animationPromise = iconControls.start({ scale: [1, 1.5, 1, 0], opacity: [1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
             break;
-        // 3. MODIFICATION: New 'on-water' animation for Yachts & Cruises
         case 'on-water':
-            animationPromise = iconControls.start({
-                rotate: [0, -2, 2, -2, 0],
-                y: [0, 2, 0, -2, 0],
-                opacity: 0,
-                transition: { duration: 1.0, ease: 'easeInOut' }
-            });
+            animationPromise = iconControls.start({ rotate: [0, -2, 2, -2, 0], y: [0, 2, 0, -2, 0], opacity: 0, transition: { duration: 1.0, ease: 'easeInOut' } });
             break;
         case 'shake-and-shrink':
             animationPromise = iconControls.start({ x: [0, -5, 5, -5, 0], scale: 0, opacity: 0, transition: { duration: 0.7 } });
@@ -76,6 +70,21 @@ const ServiceButton = ({ service }) => {
     }
   };
 
+  const handleAnimatedClick = async (e) => {
+    e.preventDefault();
+    await runAnimation();
+
+    const finalAction = () => {
+      if (service.type === 'widget') {
+        navigate(service.to);
+      } else { // Handles 'direct' type
+        handleDirectRedirect();
+      }
+    };
+
+    playVideo(service.videoSrc, finalAction);
+  };
+
   const buttonContent = (
       <>
         <motion.div animate={iconControls}>
@@ -87,35 +96,19 @@ const ServiceButton = ({ service }) => {
       </>
   );
 
-  // CORRECTED LOGIC: Use 'if' to separate widget links from direct buttons
-  if (service.type === 'widget') {
-    return (
-      <motion.div className="w-full h-full" whileHover={{ scale: 1.08, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-        <Link
-          to={service.to}
-          onClick={async (e) => {
-            e.preventDefault();
-            await runAnimation();
-            navigate(service.to);
-          }}
-          className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden ${service.colorClass}`}
-        >
-          {buttonContent}
-        </Link>
-      </motion.div>
-    );
-  }
-
-  // This is the return for 'direct' type buttons
   return (
-    <motion.div className="w-full h-full" whileHover={{ scale: 1.08, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-      <button
-        onClick={async () => {
-          await runAnimation();
-          handleDirectRedirect();
-        }}
-        disabled={isLoading}
-        className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+    <motion.div 
+      className="w-full h-full" 
+      whileHover={{ scale: 1.08, y: -5 }} 
+      whileTap={{ scale: 0.95 }} 
+      transition={{ type: "spring", stiffness: 400, damping: 15 }}
+    >
+      <div
+        role="button"
+        tabIndex="0"
+        onClick={!isLoading ? handleAnimatedClick : undefined}
+        onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
+        className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
@@ -123,13 +116,12 @@ const ServiceButton = ({ service }) => {
               <span className="mt-2 text-xs font-semibold text-white text-center">Loading...</span>
             </>
         ) : buttonContent}
-      </button>
+      </div>
     </motion.div>
   );
 };
 
 export default ServiceButton;
-
 
 
 

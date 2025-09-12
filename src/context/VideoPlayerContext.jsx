@@ -1,5 +1,3 @@
-// src/context/VideoPlayerContext.js
-
 import React, { createContext, useState, useContext } from 'react';
 
 const VideoPlayerContext = createContext();
@@ -10,26 +8,22 @@ export const VideoPlayerProvider = ({ children }) => {
   const [videoState, setVideoState] = useState({
     src: null,
     isPlaying: false,
-    onEnded: null,
+    onEndedCallback: null,
   });
 
-  // CHANGE #1: Store the callback directly, without wrapping it in another function.
-  const playVideo = (src, onEndedCallback) => {
+  const playVideo = (src, onEnded) => {
     setVideoState({
       src: src,
       isPlaying: true,
-      onEnded: onEndedCallback, // Store the function directly
+      onEndedCallback: onEnded,
     });
   };
 
-  // CHANGE #2: Execute the stored callback directly and safely.
   const stopVideo = () => {
-    // First, execute the callback if it exists
-    if (videoState.onEnded && typeof videoState.onEnded === 'function') {
-      videoState.onEnded(); // Call it directly, just once
+    if (videoState.onEndedCallback) {
+      videoState.onEndedCallback();
     }
-    // Then, reset the state
-    setVideoState({ src: null, isPlaying: false, onEnded: null });
+    setVideoState({ src: null, isPlaying: false, onEndedCallback: null });
   };
 
   const value = { playVideo, stopVideo, videoState };
