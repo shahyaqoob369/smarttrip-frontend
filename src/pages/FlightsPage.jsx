@@ -41,7 +41,7 @@ const FlightsPage = () => {
       <div className="bg-white rounded-xl shadow-lg p-8">
         <h1 className="text-3xl font-bold text-blue-700 mb-6 text-center flex items-center justify-center gap-3">
           <span>✈️</span>
-          <span>Car Rentals</span>
+          <span>Flights</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
           We’ve found the best flight provider for today.
