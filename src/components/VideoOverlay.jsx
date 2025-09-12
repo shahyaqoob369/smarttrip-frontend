@@ -1,26 +1,25 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useVideoPlayer } from '../context/VideoPlayerContext';
 
-const VideoOverlay = () => {
-  const { videoState, stopVideo } = useVideoPlayer();
-
+const VideoOverlay = ({ videoSrc, onVideoEnd }) => {
   return (
     <AnimatePresence>
-      {videoState.isPlaying && (
+      {videoSrc && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
         >
           <video
-            src={videoState.src}
+            key={videoSrc}
+            src={videoSrc}
             autoPlay
             muted
             playsInline
-            onEnded={stopVideo} // Trigger stopVideo when the clip finishes
-            className="max-w-full max-h-full"
+            onEnded={onVideoEnd}
+            className="w-full h-full object-cover"
           />
         </motion.div>
       )}

@@ -6,11 +6,11 @@ import ServicePageLayout from './components/ServicePageLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import IntroAnimation from './components/IntroAnimation';
 
-// --- 1. Import the new Video components ---
+// --- 1. Import the VideoPlayerProvider ---
+// Note: We no longer import VideoOverlay here, as it's handled by the provider.
 import { VideoPlayerProvider } from './context/VideoPlayerContext';
-import VideoOverlay from './components/VideoOverlay';
 
-// Import Pages
+// Import All Pages
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
@@ -36,11 +36,9 @@ const App = () => {
   const [showIntro, setShowIntro] = useState(true);
 
   return (
-    // --- 2. Wrap your entire app in the VideoPlayerProvider ---
+    // --- 2. Wrap the entire application in the provider ---
+    // The provider now internally handles rendering the video overlay, which fixes the bugs.
     <VideoPlayerProvider>
-      {/* 3. Add the VideoOverlay component here, so it's ready to be triggered */}
-      <VideoOverlay />
-
       {showIntro ? (
         <IntroAnimation onAnimationComplete={() => setShowIntro(false)} />
       ) : (
@@ -69,6 +67,8 @@ const App = () => {
 }
 
 export default App;
+
+
 
 
 

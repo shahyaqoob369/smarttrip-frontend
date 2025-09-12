@@ -1,36 +1,38 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useRef, useCallback } from 'react';
 
 const VideoPlayerContext = createContext();
 
 export const useVideoPlayer = () => useContext(VideoPlayerContext);
 
 export const VideoPlayerProvider = ({ children }) => {
-  const [videoState, setVideoState] = useState({
-    src: null,
-    isPlaying: false,
-    onEnded: null,
-  });
+  const [videoSrc, setVideoSrc] = useState(null);
+  
+  // Use a ref to hold the callback. This is a more stable pattern.
+  const onEndedCallbackRef = useRef(null);
 
-  const playVideo = (src, onEndedCallback) => {
-    setVideoState({
-      src: src,
-      isPlaying: true,
-      onEnded: () => onEndedCallback, // Wrap in a function to ensure it's callable
-    });
-  };
+  const playVideo = useCallback((src, onEndedCallback) => {
+    // When a video is requested, store its source and its "on ended" action.
+    onEndedCallbackRef.current = onEndedCallback;
+    setVideoSrc(src);
+  }, []);
 
-  const stopVideo = () => {
-    if (videoState.onEnded) {
-      videoState.onEnded()(); // Execute the stored callback
+  const handleVideoEnd = useCallback(() => {
+    // When the video finishes, execute the stored callback if it exists.
+    if (onEndedCallbackRef.current) {
+      onEndedCallbackRef.current();
     }
-    setVideoState({ src: null, isPlaying: false, onEnded: null });
-  };
+    // Then, reset the state to hide the player.
+    setVideoSrc(null);
+    onEndedCallbackRef.current = null;
+  }, []);
 
-  const value = { playVideo, stopVideo, videoState };
+  const value = { playVideo };
 
   return (
     <VideoPlayerContext.Provider value={value}>
       {children}
+      {/* The VideoOverlay is now part of the provider and receives props */}
+      <VideoOverlay videoSrc={videoSrc} onVideoEnd={handleVideoEnd} />
     </VideoPlayerContext.Provider>
   );
 };
