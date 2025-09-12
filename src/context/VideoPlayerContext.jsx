@@ -11,7 +11,7 @@ export const VideoPlayerProvider = ({ children }) => {
   });
   
   // Use a ref to store the callback. This is the key to the fix.
-  // A ref is a stable container that persists across re-renders.
+  // A ref is a stable container that always holds the latest value.
   const onEndedCallback = useRef(null);
 
   const playVideo = (src, onEnded) => {
