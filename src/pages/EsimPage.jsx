@@ -44,7 +44,8 @@ const EsimPage = () => {
           <span>eSIM Cards</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Stay connected in over 200 countries with an affordable eSIM.
+          Stay connected while you travel.
+          We’ve chosen today’s best eSIM deal provider for you.
         </p>
         <div className="border-t pt-8">
           <div id="esim-widget-container" ref={containerRef} className="relative min-h-[300px]">

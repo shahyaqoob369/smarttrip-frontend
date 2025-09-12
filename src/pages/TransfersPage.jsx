@@ -56,7 +56,8 @@ const TransfersPage = () => {
         </h1>
         {/* Centered paragraph */}
         <p className="mb-8 text-gray-600 text-center">
-          Book a trusted, professional driver for a seamless airport transfer.
+          We’ve picked the best airport transfer provider for today.
+          Secure your ride below in just a few clicks.
         </p>
         <div className="border-t pt-8">
           <div id="transfers-widget-container" ref={containerRef} className="relative min-h-[400px]">

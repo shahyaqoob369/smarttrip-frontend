@@ -44,7 +44,8 @@ const HotelsPage = () => {
           <span>Search for Hotels</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Find the best deals on hotels worldwide.
+          We’ve found today’s top hotel deal provider.
+          Begin your search now with our recommended partner.
         </p>
         <div className="border-t pt-8">
           <div id="hotel-widget-container" ref={containerRef} className="relative min-h-[350px]">

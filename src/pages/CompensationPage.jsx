@@ -43,7 +43,8 @@ const CompensationPage = () => {
           <span>Flight Compensation</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Check if you are eligible for compensation for a delayed or canceled flight.
+          You may be eligible for compensation today.
+          Our trusted partner helps you claim it easily.
         </p>
         <div className="border-t pt-8">
           {/* 1. We've ensured this container has a minimum height */}

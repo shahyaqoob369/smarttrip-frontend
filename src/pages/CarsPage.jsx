@@ -44,7 +44,8 @@ const CarsPage = () => {
           <span>Car Rentals</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Find the perfect rental car for your trip. Compare prices from top suppliers.
+          We’ve selected today’s best car rental provider.
+          Search below for great rental options near you.
         </p>
         <div className="border-t pt-8">
           <div id="car-rental-widget-container" ref={containerRef} className="relative min-h-[350px]">
