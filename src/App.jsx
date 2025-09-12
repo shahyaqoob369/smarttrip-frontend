@@ -27,6 +27,11 @@ import InsurancePage from './pages/InsurancePage';
 import EsimPage from './pages/EsimPage';
 import CompensationPage from './pages/CompensationPage';
 
+// --- 1. Make sure these are imported ---
+import { VideoPlayerProvider } from './context/VideoPlayerContext';
+import VideoOverlay from './components/VideoOverlay';
+
+
 // Initialize Google Analytics
 const GA_MEASUREMENT_ID = "G-LWHZL75STX"; 
 ReactGA.initialize(GA_MEASUREMENT_ID);
@@ -36,7 +41,9 @@ const App = () => {
   const [showIntro, setShowIntro] = useState(true);
 
   return (
-    <>
+    <VideoPlayerProvider>
+      {/* 3. Add the VideoOverlay component here, so it's ready to be triggered */}
+      <VideoOverlay />
       {/* 3. Conditionally render the animation or the main site */}
       {showIntro ? (
         <IntroAnimation onAnimationComplete={() => setShowIntro(false)} />
@@ -66,7 +73,8 @@ const App = () => {
           <Route path="/admin/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         </Routes>
       )}
-    </>
+
+    </VideoPlayerProvider>
   );
 }
 
