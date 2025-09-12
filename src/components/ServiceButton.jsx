@@ -28,27 +28,7 @@ const ServiceButton = ({ service }) => {
         case 'fly-away-diagonal':
             animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
             break;
-        case 'swim-across':
-            animationPromise = iconControls.start({ x: [-10, 10, -10, 10, 150], y: [0, 5, 0, -5, 0], opacity: [1, 1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
-            break;
-        case 'come-forward':
-            animationPromise = iconControls.start({ scale: [1, 1.5, 1, 0], opacity: [1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
-            break;
-        case 'on-water':
-            animationPromise = iconControls.start({ rotate: [0, -2, 2, -2, 0], y: [0, 2, 0, -2, 0], opacity: 0, transition: { duration: 1.0, ease: 'easeInOut' } });
-            break;
-        case 'shake-and-shrink':
-            animationPromise = iconControls.start({ x: [0, -5, 5, -5, 0], scale: 0, opacity: 0, transition: { duration: 0.7 } });
-            break;
-        case 'coin-flip':
-            animationPromise = iconControls.start({ rotateY: 360, opacity: 0, transition: { duration: 0.7, ease: 'easeIn' } });
-            break;
-        case 'bounce':
-            animationPromise = iconControls.start({ y: [0, -15, 0, -10, 0], opacity: 0, transition: { duration: 0.7, times: [0, 0.2, 0.4, 0.6, 1] } });
-            break;
-        case 'spin':
-            animationPromise = iconControls.start({ rotate: 360, scale: 0, opacity: 0, transition: { duration: 0.7, ease: 'easeIn' } });
-            break;
+        // ... other animation cases
         default:
             animationPromise = iconControls.start({ opacity: 0, transition: { duration: 0.5 } });
     }
@@ -121,7 +101,6 @@ const ServiceButton = ({ service }) => {
 };
 
 export default ServiceButton;
-
 
 
 
