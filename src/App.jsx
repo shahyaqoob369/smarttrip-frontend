@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ReactGA from "react-ga4"
 import MainLayout from './components/MainLayout';
-import ServicePageLayout from './components/ServicePageLayout'; // Import the new layout
+import ServicePageLayout from './components/ServicePageLayout';
 import ProtectedRoute from './components/ProtectedRoute';;
 import IntroAnimation from './components/IntroAnimation';
 
@@ -10,6 +10,8 @@ import IntroAnimation from './components/IntroAnimation';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';  
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 
@@ -55,6 +57,8 @@ const App = () => {
           {/* --- ALL other pages use the new ServicePageLayout (with the small header) --- */}
           <Route path="/about" element={<ServicePageLayout><AboutPage /></ServicePageLayout>} />
           <Route path="/contact" element={<ServicePageLayout><ContactPage /></ServicePageLayout>} />
+          <Route path="/privacy" element={<ServicePageLayout><PrivacyPage /></ServicePageLayout>} />
+          <Route path="/terms" element={<ServicePageLayout><TermsPage /></ServicePageLayout>} />   
           <Route path="/hotels" element={<ServicePageLayout><HotelsPage /></ServicePageLayout>} />
           <Route path="/flights" element={<ServicePageLayout><FlightsPage /></ServicePageLayout>} />
           <Route path="/cars" element={<ServicePageLayout><CarsPage /></ServicePageLayout>} />

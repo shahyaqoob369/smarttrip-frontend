@@ -2,14 +2,22 @@ import React from 'react';
 
 const AboutPage = () => {
   return (
-    <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          Unlocking the World's Best Travel Deals
-        </h2>
-        <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-500">
-          At SmartTripDeals, we believe luxury travel should be accessible. Our advanced platform works in real-time, scanning a vast network of top-tier providers to bring you the best available offers on flights, hotels, and rentals the moment they appear. We cut through the noise, so you can stop searching and start traveling.
-        </p>
+    <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <h1 className="text-3xl font-bold text-blue-700 mb-6 text-center">
+          About SmartTripDeals
+        </h1>
+        <div className="prose lg:prose-lg mx-auto text-gray-600">
+          <p>
+            Welcome to SmartTripDeals, your premier destination for finding the best travel offers from across the globe. Our mission is simple: to make travel planning effortless and affordable.
+          </p>
+          <p>
+            We believe that amazing travel experiences shouldn't require endless hours of searching. Our advanced platform works in real-time, scanning a vast network of top-tier providers to bring you the best available offers on flights, hotels, car rentals, and more the moment they appear. We cut through the noise, so you can stop searching and start traveling.
+          </p>
+          <p>
+            As a trusted affiliate partner, we connect you with the world's leading travel brands, ensuring you get reliable service and competitive prices every time. Thank you for choosing SmartTripDeals for your next adventure!
+          </p>
+        </div>
       </div>
     </div>
   );
