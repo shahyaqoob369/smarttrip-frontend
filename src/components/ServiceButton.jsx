@@ -102,7 +102,7 @@ const ServiceButton = ({ service }) => {
     </motion.div>
     {/* 1. Margin-top changed from mt-3 to mt-1 to decrease space */}
     {/* 2. Text size changed from text-base to text-sm */}
-    <span className="text-xs font-bold text-white text-center uppercase tracking-wider">
+    <span className="-mt-2 text-xs font-bold text-white text-center uppercase tracking-wider">
       {service.label}
     </span>
   </>
@@ -121,7 +121,7 @@ const ServiceButton = ({ service }) => {
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
         // MODIFICATION: Increased button height and padding to fit the larger icon
-        className={`group w-full h-40 flex flex-col items-center justify-center p-1 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        className={`group w-full h-40 flex flex-col items-center justify-center p-1.5 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
