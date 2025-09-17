@@ -99,7 +99,7 @@ const ServiceButton = ({ service }) => {
     <>
       <motion.div animate={iconControls}>
         {/* MODIFICATION: Using a large, standard Tailwind size */}
-        <service.Icon className="h-16 w-16 text-white" />
+        <service.Icon className="h-24 w-20 text-white" />
       </motion.div>
       <span className="mt-3 text-base font-bold text-white text-center uppercase tracking-wider">
         {service.label}
