@@ -118,7 +118,9 @@ const ServiceButton = ({ service }) => {
     tabIndex="0"
     onClick={!isLoading ? handleAnimatedClick : undefined}
     onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-    className={`group w-full h-40 flex flex-col items-center justify-center px-2 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+    className={`group w-full h-28 flex flex-col items-center justify-center px-2 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+    // className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+
   >
     {isLoading ? (
       <>
