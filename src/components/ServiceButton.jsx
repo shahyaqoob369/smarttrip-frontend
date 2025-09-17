@@ -96,21 +96,22 @@ const ServiceButton = ({ service }) => {
   };
 
   const buttonContent = (
-      <>
-        <motion.div animate={iconControls}>
-            <service.Icon className="h-8 w-8 text-white" />
-        </motion.div>
-        <span className="mt-2 text-sm font-semibold text-white text-center">
-            {service.label}
-        </span>
-      </>
+    <>
+      <motion.div animate={iconControls}>
+        {/* 1. Using a large, standard Tailwind size */}
+        <service.Icon className="h-14 w-14 text-white" />
+      </motion.div>
+      <span className="mt-2 text-sm font-bold text-white text-center uppercase">
+        {service.label}
+      </span>
+    </>
   );
 
   return (
-    <motion.div 
-      className="w-full h-full" 
-      whileHover={{ scale: 1.08, y: -5 }} 
-      whileTap={{ scale: 0.95 }} 
+    <motion.div
+      className="w-full h-full"
+      whileHover={{ scale: 1.05, y: -4 }}
+      whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 15 }}
     >
       <div
@@ -118,7 +119,8 @@ const ServiceButton = ({ service }) => {
         tabIndex="0"
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-        className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        // 2. Increased the button's height to h-36 to make space
+        className={`group w-full h-36 flex flex-col items-center justify-center p-3 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-2 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
@@ -138,16 +140,21 @@ export default ServiceButton;
 
 
 
+
+
+
 // import React, { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import ReactGA from 'react-ga4';
 // import { motion, useAnimationControls } from 'framer-motion';
+// import { useVideoPlayer } from '../context/VideoPlayerContext';
 
 // const ServiceButton = ({ service }) => {
 //   const [isLoading, setIsLoading] = useState(false);
 //   const apiUrl = import.meta.env.VITE_API_URL;
 //   const navigate = useNavigate();
 //   const iconControls = useAnimationControls();
+//   const { playVideo } = useVideoPlayer();
 
 //   const trackEvent = () => {
 //     ReactGA.event({
@@ -158,9 +165,11 @@ export default ServiceButton;
 //   };
 
 //   const runAnimation = async () => {
+//     iconControls.set({ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, rotateY: 0 });
 //     trackEvent();
 //     let animationPromise;
-//     switch (service.animationType) {
+//     // ... (switch case for animations is correct)
+//       switch (service.animationType) {
 //         case 'fly-away':
 //             animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
 //             break;
@@ -216,6 +225,21 @@ export default ServiceButton;
 //     }
 //   };
 
+//   const handleAnimatedClick = async (e) => {
+//     e.preventDefault();
+//     await runAnimation();
+
+//     const finalAction = () => {
+//   if (service.type === 'widget') {
+//     navigate(service.to);  // now runs only after stopVideo()
+//   } else {
+//     handleDirectRedirect();
+//   }
+// };
+
+//     playVideo(service.videoSrc, finalAction);
+//   };
+
 //   const buttonContent = (
 //       <>
 //         <motion.div animate={iconControls}>
@@ -227,35 +251,19 @@ export default ServiceButton;
 //       </>
 //   );
 
-//   // CORRECTED LOGIC: Use 'if' to separate widget links from direct buttons
-//   if (service.type === 'widget') {
-//     return (
-//       <motion.div className="w-full h-full" whileHover={{ scale: 1.08, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-//         <Link
-//           to={service.to}
-//           onClick={async (e) => {
-//             e.preventDefault();
-//             await runAnimation();
-//             navigate(service.to);
-//           }}
-//           className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden ${service.colorClass}`}
-//         >
-//           {buttonContent}
-//         </Link>
-//       </motion.div>
-//     );
-//   }
-
-//   // This is the return for 'direct' type buttons
 //   return (
-//     <motion.div className="w-full h-full" whileHover={{ scale: 1.08, y: -5 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 15 }}>
-//       <button
-//         onClick={async () => {
-//           await runAnimation();
-//           handleDirectRedirect();
-//         }}
-//         disabled={isLoading}
-//         className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+//     <motion.div 
+//       className="w-full h-full" 
+//       whileHover={{ scale: 1.08, y: -5 }} 
+//       whileTap={{ scale: 0.95 }} 
+//       transition={{ type: "spring", stiffness: 400, damping: 15 }}
+//     >
+//       <div
+//         role="button"
+//         tabIndex="0"
+//         onClick={!isLoading ? handleAnimatedClick : undefined}
+//         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
+//         className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
 //       >
 //         {isLoading ? (
 //             <>
@@ -263,7 +271,7 @@ export default ServiceButton;
 //               <span className="mt-2 text-xs font-semibold text-white text-center">Loading...</span>
 //             </>
 //         ) : buttonContent}
-//       </button>
+//       </div>
 //     </motion.div>
 //   );
 // };
