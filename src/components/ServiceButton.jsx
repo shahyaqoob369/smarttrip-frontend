@@ -98,11 +98,11 @@ const ServiceButton = ({ service }) => {
   const buttonContent = (
     <>
       <motion.div animate={iconControls}>
-        {/* MODIFICATION: Increased icon size from h-14 to h-16 */}
-        <service.Icon className="h-16 w-16 text-white" />
+        {/* MODIFICATION: Used arbitrary values for exact sizing. h-30 -> h-[7.5rem] (120px) */}
+        <service.Icon className="h-[7.5rem] w-[7rem] text-white" />
       </motion.div>
-      {/* MODIFICATION: Decreased margin-top from mt-3 to mt-2 */}
-      <span className="mt-2 text-base font-bold text-white text-center uppercase tracking-wider">
+      {/* MODIFICATION: Reduced margin-top to allow flexbox to handle spacing */}
+      <span className="mt-1 text-base font-bold text-white text-center uppercase tracking-wider">
         {service.label}
       </span>
     </>
@@ -120,8 +120,8 @@ const ServiceButton = ({ service }) => {
         tabIndex="0"
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-        // MODIFICATION: Increased ring size from ring-2 to ring-4
-        className={`group w-full h-32 flex flex-col items-center justify-center p-3 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        // MODIFICATION: Increased button height to h-40 and changed justify-center to justify-around for better spacing
+        className={`group w-full h-40 flex flex-col items-center justify-around p-3 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
@@ -135,7 +135,6 @@ const ServiceButton = ({ service }) => {
 };
 
 export default ServiceButton;
-
 
 
 
