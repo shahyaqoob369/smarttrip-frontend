@@ -97,25 +97,21 @@ const ServiceButton = ({ service }) => {
 
   const buttonContent = (
     <>
-      <motion.div>
-        {/* --- THIS IS THE KEY CHANGE --- */}
-        {/* We now use a 'style' prop to set the exact size in pixels */}
-        <service.Icon 
-          className="text-white" 
-          style={{ height: `${service.iconSize}px`, width: `${service.iconSize}px` }} 
-        />
+      <motion.div animate={iconControls}>
+        {/* MODIFICATION: Using a large, standard Tailwind size */}
+        <service.Icon className="h-16 w-16 text-white" />
       </motion.div>
-      <span className="mt-2 text-sm font-bold text-white text-center uppercase">
+      <span className="mt-3 text-base font-bold text-white text-center uppercase tracking-wider">
         {service.label}
       </span>
     </>
   );
 
   return (
-    <motion.div 
-      className="w-full h-full" 
-      whileHover={{ scale: 1.08, y: -5 }} 
-      whileTap={{ scale: 0.95 }} 
+    <motion.div
+      className="w-full h-full"
+      whileHover={{ scale: 1.05, y: -4 }}
+      whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 15 }}
     >
       <div
@@ -123,7 +119,8 @@ const ServiceButton = ({ service }) => {
         tabIndex="0"
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-        className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        // MODIFICATION: Increased button height and padding to fit the larger icon
+        className={`group w-full h-40 flex flex-col items-center justify-center p-4 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
@@ -137,7 +134,6 @@ const ServiceButton = ({ service }) => {
 };
 
 export default ServiceButton;
-
 
 
 
