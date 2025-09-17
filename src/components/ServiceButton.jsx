@@ -98,7 +98,8 @@ const ServiceButton = ({ service }) => {
   const buttonContent = (
     <>
       <motion.div animate={iconControls}>
-      <service.Icon className="h-[30px] w-[30px] text-white" />
+        {/* MODIFICATION: Increased icon size from h-14 to h-16 */}
+        <service.Icon style={{ fontSize: "30px", width: "30px", height: "30px" }} className="text-white" />
       </motion.div>
       {/* MODIFICATION: Decreased margin-top from mt-3 to mt-2 */}
       <span className="mt-2 text-base font-bold text-white text-center uppercase tracking-wider">
