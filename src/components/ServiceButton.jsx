@@ -98,11 +98,11 @@ const ServiceButton = ({ service }) => {
   const buttonContent = (
     <>
       <motion.div animate={iconControls}>
-        {/* MODIFICATION: Increased icon size */}
-        <service.Icon className="h-24 w-24 text-white" />
+        {/* MODIFICATION: Increased icon size from h-14 to h-16 */}
+        <service.Icon className="h-16 w-16 text-white" />
       </motion.div>
-      {/* MODIFICATION: Added uppercase and adjusted margin/text size */}
-      <span className="mt-3 text-base font-bold text-white text-center uppercase tracking-wider">
+      {/* MODIFICATION: Decreased margin-top from mt-3 to mt-2 */}
+      <span className="mt-2 text-base font-bold text-white text-center uppercase tracking-wider">
         {service.label}
       </span>
     </>
@@ -111,7 +111,7 @@ const ServiceButton = ({ service }) => {
   return (
     <motion.div
       className="w-full h-full"
-      whileHover={{ scale: 1.05, y: -4 }} // Slightly adjusted hover for the new look
+      whileHover={{ scale: 1.05, y: -4 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 400, damping: 15 }}
     >
@@ -120,8 +120,8 @@ const ServiceButton = ({ service }) => {
         tabIndex="0"
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-        // MODIFICATION: Added ring for inset border and adjusted padding/height
-        className={`group w-full h-32 flex flex-col items-center justify-center p-3 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-2 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        // MODIFICATION: Increased ring size from ring-2 to ring-4
+        className={`group w-full h-32 flex flex-col items-center justify-center p-3 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
@@ -135,7 +135,6 @@ const ServiceButton = ({ service }) => {
 };
 
 export default ServiceButton;
-
 
 
 
