@@ -5,7 +5,7 @@ import ServiceButton from './ServiceButton';
 import HotelIcon from '../assets/icons/hotel_new.svg?react';
 import FlightIcon from '../assets/icons/plane_new.svg?react';
 import TrainIcon from '../assets/icons/train.svg?react';
-import CarIcon from '../assets/icons/car.svg?react';
+import CarIcon from '../assets/icons/car_new.svg?react';
 import TransferIcon from '../assets/icons/transfer.svg?react';
 import ToursIcon from '../assets/icons/tour_1.svg?react';
 import VacationIcon from '../assets/icons/vacation_1.svg?react';
