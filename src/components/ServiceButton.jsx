@@ -96,16 +96,17 @@ const ServiceButton = ({ service }) => {
   };
 
   const buttonContent = (
-    <>
-      <motion.div animate={iconControls}>
-        {/* MODIFICATION: Using a large, standard Tailwind size */}
-        <service.Icon className="h-24 w-20 text-white" />
-      </motion.div>
-      <span className="mt-3 text-base font-bold text-white text-center uppercase tracking-wider">
-        {service.label}
-      </span>
-    </>
-  );
+  <>
+    <motion.div animate={iconControls}>
+      <service.Icon className="h-24 w-20 text-white" />
+    </motion.div>
+    {/* 1. Margin-top changed from mt-3 to mt-1 to decrease space */}
+    {/* 2. Text size changed from text-base to text-sm */}
+    <span className="mt-1 text-sm font-bold text-white text-center uppercase tracking-wider">
+      {service.label}
+    </span>
+  </>
+);
 
   return (
     <motion.div
