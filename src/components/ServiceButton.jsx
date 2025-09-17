@@ -23,49 +23,83 @@ const ServiceButton = ({ service }) => {
     iconControls.set({ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, rotateY: 0 });
     trackEvent();
     let animationPromise;
-    // ... (switch case for animations is correct)
-      switch (service.animationType) {
-        case 'fly-away':
-            animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
-            break;
-        // 1. MODIFICATION: Vacation Rentals now flies UP
-        case 'fly-away-diagonal':
-            animationPromise = iconControls.start({ y: -50, x: 50, rotate: -15, opacity: 0, transition: { duration: 0.6, ease: 'easeIn' } });
-            break;
-        case 'swim-across':
-            animationPromise = iconControls.start({ x: [-10, 10, -10, 10, 150], y: [0, 5, 0, -5, 0], opacity: [1, 1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
-            break;
-        // 2. MODIFICATION: Trains & Buses animation is now longer
-        case 'come-forward':
-            animationPromise = iconControls.start({ scale: [1, 1.5, 1, 0], opacity: [1, 1, 1, 0], transition: { duration: 1.2, ease: 'easeInOut' } });
-            break;
-        // 3. MODIFICATION: New 'on-water' animation for Yachts & Cruises
-        case 'on-water':
-            animationPromise = iconControls.start({
-                rotate: [0, -2, 2, -2, 0],
-                y: [0, 2, 0, -2, 0],
-                opacity: 0,
-                transition: { duration: 1.0, ease: 'easeInOut' }
-            });
-            break;
-        case 'shake-and-shrink':
-            animationPromise = iconControls.start({ x: [0, -5, 5, -5, 0], scale: 0, opacity: 0, transition: { duration: 0.7 } });
-            break;
-        case 'coin-flip':
-            animationPromise = iconControls.start({ rotateY: 360, opacity: 0, transition: { duration: 0.7, ease: 'easeIn' } });
-            break;
-        case 'bounce':
-            animationPromise = iconControls.start({ y: [0, -15, 0, -10, 0], opacity: 0, transition: { duration: 0.7, times: [0, 0.2, 0.4, 0.6, 1] } });
-            break;
-        case 'spin':
-            animationPromise = iconControls.start({ rotate: 360, scale: 0, opacity: 0, transition: { duration: 0.7, ease: 'easeIn' } });
-            break;
-        default:
-            animationPromise = iconControls.start({ opacity: 0, transition: { duration: 0.5 } });
+
+    switch (service.animationType) {
+      case 'fly-away':
+        animationPromise = iconControls.start({
+          y: -50, x: 50, rotate: -15, opacity: 0,
+          transition: { duration: 0.6, ease: 'easeIn' }
+        });
+        break;
+      case 'fly-away-diagonal':
+        animationPromise = iconControls.start({
+          y: -50, x: 50, rotate: -15, opacity: 0,
+          transition: { duration: 0.6, ease: 'easeIn' }
+        });
+        break;
+      case 'swim-across':
+        animationPromise = iconControls.start({
+          x: [-10, 10, -10, 10, 150],
+          y: [0, 5, 0, -5, 0],
+          opacity: [1, 1, 1, 1, 0],
+          transition: { duration: 1.2, ease: 'easeInOut' }
+        });
+        break;
+      case 'come-forward':
+        animationPromise = iconControls.start({
+          scale: [1, 1.5, 1, 0],
+          opacity: [1, 1, 1, 0],
+          transition: { duration: 1.2, ease: 'easeInOut' }
+        });
+        break;
+      case 'on-water':
+        animationPromise = iconControls.start({
+          rotate: [0, -2, 2, -2, 0],
+          y: [0, 2, 0, -2, 0],
+          opacity: 0,
+          transition: { duration: 1.0, ease: 'easeInOut' }
+        });
+        break;
+      case 'shake-and-shrink':
+        animationPromise = iconControls.start({
+          x: [0, -5, 5, -5, 0],
+          scale: 0,
+          opacity: 0,
+          transition: { duration: 0.7 }
+        });
+        break;
+      case 'coin-flip':
+        animationPromise = iconControls.start({
+          rotateY: 360,
+          opacity: 0,
+          transition: { duration: 0.7, ease: 'easeIn' }
+        });
+        break;
+      case 'bounce':
+        animationPromise = iconControls.start({
+          y: [0, -15, 0, -10, 0],
+          opacity: 0,
+          transition: { duration: 0.7, times: [0, 0.2, 0.4, 0.6, 1] }
+        });
+        break;
+      case 'spin':
+        animationPromise = iconControls.start({
+          rotate: 360,
+          scale: 0,
+          opacity: 0,
+          transition: { duration: 0.7, ease: 'easeIn' }
+        });
+        break;
+      default:
+        animationPromise = iconControls.start({
+          opacity: 0,
+          transition: { duration: 0.5 }
+        });
     }
+
     await animationPromise;
   };
-  
+
   const handleDirectRedirect = async () => {
     setIsLoading(true);
     try {
@@ -85,23 +119,26 @@ const ServiceButton = ({ service }) => {
     await runAnimation();
 
     const finalAction = () => {
-  if (service.type === 'widget') {
-    navigate(service.to);  // now runs only after stopVideo()
-  } else {
-    handleDirectRedirect();
-  }
-};
+      if (service.type === 'widget') {
+        navigate(service.to);
+      } else {
+        handleDirectRedirect();
+      }
+    };
 
     playVideo(service.videoSrc, finalAction);
   };
 
   const buttonContent = (
     <>
-      <motion.div animate={iconControls}>
-        {/* MODIFICATION: Increased icon size from h-14 to h-16 */}
-        <service.Icon style={{ fontSize: "30px", width: "30px", height: "30px" }} className="text-white" />
+      <motion.div animate={iconControls} className="flex items-center justify-center">
+        {/* ✅ Force all icons to 30×30 */}
+        {React.cloneElement(<service.Icon />, {
+          width: 30,
+          height: 30,
+          style: { width: 30, height: 30, flexShrink: 0 }
+        })}
       </motion.div>
-      {/* MODIFICATION: Decreased margin-top from mt-3 to mt-2 */}
       <span className="mt-2 text-base font-bold text-white text-center uppercase tracking-wider">
         {service.label}
       </span>
@@ -120,14 +157,34 @@ const ServiceButton = ({ service }) => {
         tabIndex="0"
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-        // MODIFICATION: Increased ring size from ring-2 to ring-4
         className={`group w-full h-32 flex flex-col items-center justify-center p-3 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
-            <>
-              <svg className="animate-spin h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-              <span className="mt-2 text-xs font-semibold text-white text-center">Loading...</span>
-            </>
+          <>
+            <svg
+              className="animate-spin h-8 w-8 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 
+                   5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 
+                   5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            <span className="mt-2 text-xs font-semibold text-white text-center">Loading...</span>
+          </>
         ) : buttonContent}
       </div>
     </motion.div>
@@ -135,6 +192,7 @@ const ServiceButton = ({ service }) => {
 };
 
 export default ServiceButton;
+
 
 
 
