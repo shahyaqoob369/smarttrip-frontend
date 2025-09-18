@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+iimport React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Import your slider images
@@ -12,17 +12,18 @@ const images = [slider1, slider2, slider3, slider4];
 const Hero = () => {
   const [current, setCurrent] = useState(0);
 
-  // Auto-slide every 5 seconds
+  // Auto-slide every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative w-full h-[80vh] md:h-[90vh] overflow-hidden rounded-2xl shadow-xl">
-      <AnimatePresence>
+    <div className="relative w-full h-[500px] overflow-hidden rounded-2xl shadow-xl">
+      {/* Image Transition */}
+      <AnimatePresence mode="wait">
         <motion.img
           key={current}
           src={images[current]}
@@ -31,15 +32,21 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2 }}
+          transition={{ duration: 1.0 }}
         />
       </AnimatePresence>
 
-      {/* Overlay Content (optional) */}
-      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-        <h1 className="text-white text-4xl md:text-6xl font-bold drop-shadow-lg">
-          Smart <span className="text-orange-400">Trip</span> Deals
-        </h1>
+      {/* Slider Dots */}
+      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrent(index)}
+            className={`w-3 h-3 rounded-full ${
+              index === current ? "bg-white" : "bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );
