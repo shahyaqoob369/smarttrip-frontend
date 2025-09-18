@@ -1,18 +1,52 @@
-import React from 'react';
-import ImageSlider from './ImageSlider'; // Import the new slider component
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// Import your slider images
+import slider1 from "../assets/img/slider_img_1.svg";
+import slider2 from "../assets/img/slider_img_2.svg";
+import slider3 from "../assets/img/slider_img_3.svg";
+import slider4 from "../assets/img/slider_img_4.svg";
+
+const images = [slider1, slider2, slider3, slider4];
 
 const Hero = () => {
+  const [current, setCurrent] = useState(0);
+
+  // Auto-slide every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    // The wrapper div now directly contains the ImageSlider
-    // Removed the bg-white, rounded-2xl, shadow-xl, p-8 classes from this div
-    // as the slider itself will handle its own styling (rounded, etc.)
-    <div className="w-full h-full"> 
-      <ImageSlider interval={5000} /> {/* Use your new image slider here */}
+    <div className="relative w-full h-[80vh] md:h-[90vh] overflow-hidden rounded-2xl shadow-xl">
+      <AnimatePresence>
+        <motion.img
+          key={current}
+          src={images[current]}
+          alt="Hero Slide"
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
+        />
+      </AnimatePresence>
+
+      {/* Overlay Content (optional) */}
+      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+        <h1 className="text-white text-4xl md:text-6xl font-bold drop-shadow-lg">
+          Smart <span className="text-orange-400">Trip</span> Deals
+        </h1>
+      </div>
     </div>
   );
 };
 
 export default Hero;
+
 
 
 
