@@ -4,14 +4,14 @@ import ServiceButton from './ServiceButton';
 // Icon Imports
 import HotelIcon from '../assets/icons/hotel_new.svg?react';
 import FlightIcon from '../assets/icons/plane_new.svg?react';
-import TrainIcon from '../assets/icons/train.svg?react';
+import TrainIcon from '../assets/icons/train_new.svg?react';
 import CarIcon from '../assets/icons/car_new.svg?react';
-import TransferIcon from '../assets/icons/transfer.svg?react';
-import ToursIcon from '../assets/icons/tour_1.svg?react';
+import TransferIcon from '../assets/icons/transfer_new_2.svg?react';
+import ToursIcon from '../assets/icons/tour_new.svg?react';
 import VacationIcon from '../assets/icons/vacation_new.svg?react';
 import HostelIcon from '../assets/icons/hostel_new.svg?react';
-import YachtIcon from '../assets/icons/yacht.svg?react';
-import InsuranceIcon from '../assets/icons/insurance.svg?react';
+import YachtIcon from '../assets/icons/yacht_new.svg?react';
+import InsuranceIcon from '../assets/icons/insurance_new.svg?react';
 import EsimIcon from '../assets/icons/esim_new.svg?react';
 import CompensationIcon from '../assets/icons/compensation_new.svg?react';
 
