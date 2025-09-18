@@ -60,6 +60,10 @@ const ServiceButton = ({ service }) => {
         case 'spin':
             animationPromise = iconControls.start({ rotate: 360, scale: 0, opacity: 0, transition: { duration: 0.7, ease: 'easeIn' } });
             break;
+        case 'balloon-fly':
+            animationPromise = iconControls.start({x: [0, -10, 10, -15, 15, 0], y: [0, -20, -50, -80, -120], scale: [1, 1.05, 0.95, 0.9], opacity: [1, 1, 0.9, 0.7, 0], transition: {duration: 2.5, ease: 'easeOut', times: [0, 0.2, 0.4, 0.7, 1]}});
+            break;
+
         default:
             animationPromise = iconControls.start({ opacity: 0, transition: { duration: 0.5 } });
     }
