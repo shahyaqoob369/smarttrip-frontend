@@ -16,12 +16,12 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 8000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="relative w-full h-[500px] overflow-hidden rounded-2xl shadow-xl">
+    <div className="relative w-full aspect-[16/9] max-h-[500px] overflow-hidden rounded-2xl shadow-xl">
       {/* Image Transition */}
       <AnimatePresence mode="wait">
         <motion.img
