@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 
 const ActivitiesPage = () => {
-  // State to hold the user's city input
   const [city, setCity] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const affiliateMarker = '661841';
     
-    // This is the correct search URL structure for Tiqets.
-    // It accepts a city name directly.
-    const searchUrl = `https://www.tiqets.com/en/search?q=${encodeURIComponent(city)}&marker=${affiliateMarker}`;
+    // --- THIS IS THE CORRECTED URL STRUCTURE ---
+    // We use the official Travelpayouts redirect link for Tiqets.
+    const baseUrl = 'https://tiqets.tp.st/Ge9z3E5i';
     
-    // Open the search results in a new tab
+    // We add the user's search query and our marker to this base URL.
+    const searchUrl = `${baseUrl}?q=${encodeURIComponent(city)}&marker=${affiliateMarker}`;
+    
     window.open(searchUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -27,7 +28,6 @@ const ActivitiesPage = () => {
           Discover and book unforgettable experiences around the world.
         </p>
         <div className="border-t pt-8">
-          {/* Our New Custom Search Form */}
           <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
             <div>
               <label htmlFor="city" className="block text-sm font-medium text-gray-700">
