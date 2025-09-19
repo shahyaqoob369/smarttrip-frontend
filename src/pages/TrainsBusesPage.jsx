@@ -6,14 +6,22 @@ const TrainsBusesPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const affiliateMarker = '661841';
+    // This is the client's unique affiliate ID for Travelpayouts
+    const affiliateMarker = '661841'; 
     
-    // This is the official Travelpayouts redirect link for Omio, 
-    // configured to accept search parameters.
-    const baseUrl = 'https://omio.tp.st/pA7sW7kS';
-    
-    // We add the user's search query and our marker to this base URL.
-    const searchUrl = `${baseUrl}?origin_name=${encodeURIComponent(origin)}&destination_name=${encodeURIComponent(destination)}&marker=${affiliateMarker}`;
+    // MODIFICATION: This is the correct base URL for generating an Omio search.
+    // We are now building the URL directly for Omio's search engine.
+    const baseUrl = 'https://www.omio.com/search-frontend/results';
+
+    // MODIFICATION: The parameter names have been updated to match what Omio's system expects.
+    // We are also including the essential 'shmarker' for affiliate tracking.
+    const queryParams = new URLSearchParams({
+      departure_name: origin,
+      arrival_name: destination,
+      shmarker: affiliateMarker
+    }).toString();
+
+    const searchUrl = `${baseUrl}?${queryParams}`;
     
     window.open(searchUrl, '_blank', 'noopener,noreferrer');
   };
@@ -21,15 +29,14 @@ const TrainsBusesPage = () => {
   return (
     <div className="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
       <div className="bg-white rounded-xl shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-blue-700 mb-6 text-center flex items-center justify-center gap-3">
+        <h1 className="text-3xl font-bold text-red-600 mb-6 text-center flex items-center justify-center gap-3">
           <span>🚆</span>
           <span>Search for Trains & Buses</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Find the best deals on train and bus tickets across Europe and beyond.
+          Find the best deals on train and bus tickets across Europe and beyond with our partner, Omio.
         </p>
         <div className="border-t pt-8">
-          {/* Our New Custom Search Form for Omio */}
           <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -43,7 +50,7 @@ const TrainsBusesPage = () => {
                   onChange={(e) => setOrigin(e.target.value)}
                   placeholder="e.g., Rome"
                   required
-                  className="mt-1 block w-full p-3 border rounded-md"
+                  className="mt-1 block w-full p-3 border rounded-md focus:ring-red-500 focus:border-red-500"
                 />
               </div>
               <div>
@@ -57,12 +64,12 @@ const TrainsBusesPage = () => {
                   onChange={(e) => setDestination(e.target.value)}
                   placeholder="e.g., Florence"
                   required
-                  className="mt-1 block w-full p-3 border rounded-md"
+                  className="mt-1 block w-full p-3 border rounded-md focus:ring-red-500 focus:border-red-500"
                 />
               </div>
             </div>
             <div className="pt-2">
-              <button type="submit" className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700">
+              <button type="submit" className="w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700">
                 Search Tickets
               </button>
             </div>
