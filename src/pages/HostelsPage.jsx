@@ -4,8 +4,8 @@ const HostelsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef(null);
 
-  // ✅ Same base widget as Hotels, but force the result page to filter hostels
-  const widgetScript = `//tpwdg.com/content?currency=usd&trs=446991&shmarker=661841&show_hotels=true&powered_by=true&locale=en&searchUrl=search.hotellook.com/#f%5Bproperty_types%5D%3D7&primary_override=%23FF8E01&color_button=%23FF8E01&color_icons=%23FF8E01&secondary=%23FFFFFF&dark=%23262626&light=%23FFFFFF&special=%23C4C4C4&color_focused=%23FF8E01&border_radius=5&plain=false&promo_id=7873&campaign_id=101`;
+  // ✅ Keep the original working Hotels widget
+  const widgetScript = `//tpwdg.com/content?currency=usd&trs=446991&shmarker=661841&show_hotels=true&powered_by=true&locale=en&searchUrl=search.hotellook.com&primary_override=%23FF8E01&color_button=%23FF8E01&color_icons=%23FF8E01&secondary=%23FFFFFF&dark=%23262626&light=%23FFFFFF&special=%23C4C4C4&color_focused=%23FF8E01&border_radius=5&plain=false&promo_id=7873&campaign_id=101`;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -16,12 +16,23 @@ const HostelsPage = () => {
         if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
           setIsLoading(false);
           observer.disconnect();
+
+          // ✅ Force links inside widget to always add "property_types=7"
+          const widgetLinks = container.querySelectorAll("a");
+          widgetLinks.forEach((link) => {
+            if (link.href.includes("search.hotellook.com")) {
+              if (!link.href.includes("property_types")) {
+                link.href += (link.href.includes("?") ? "&" : "?") + "property_types=7";
+              }
+            }
+          });
+
           return;
         }
       }
     });
 
-    observer.observe(container, { childList: true });
+    observer.observe(container, { childList: true, subtree: true });
 
     const script = document.createElement('script');
     script.src = widgetScript;
