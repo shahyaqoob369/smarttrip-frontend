@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const TrainsBusesPage = () => {
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
+  const [origin, setOrigin] = useState('');
+  const [destination, setDestination] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // This is the client's unique affiliate ID for Travelpayouts.
+    const affiliateMarker = '661841'; 
+    
+    // --- FIX: The base URL now correctly points to the Omio homepage. ---
+    // This is the proper entry point for initiating a search.
+    const baseUrl = 'https://www.omio.com/';
 
-    const affiliateMarker = "661841";
+    // We build a query string with the search parameters. Omio's system
+    // will detect these parameters and automatically run the search when the page loads.
+    const queryParams = new URLSearchParams({
+      departure_name: origin,
+      arrival_name: destination,
+      shmarker: affiliateMarker
+    }).toString();
 
-    // Omio search deep link format
-    const searchUrl = `https://www.omio.com/search/?de=${encodeURIComponent(
-      origin
-    )}&arr=${encodeURIComponent(destination)}&shmarker=${affiliateMarker}`;
-
-    window.open(searchUrl, "_blank", "noopener,noreferrer");
+    const searchUrl = `${baseUrl}?${queryParams}`;
+    
+    // Open the correctly formatted search URL in a new tab.
+    window.open(searchUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -25,17 +35,13 @@ const TrainsBusesPage = () => {
           <span>Search for Trains & Buses</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Find the best deals on train and bus tickets across Europe and beyond
-          with our partner, Omio.
+          Find the best deals on train and bus tickets across Europe and beyond with our partner, Omio.
         </p>
         <div className="border-t pt-8">
           <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label
-                  htmlFor="origin"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="origin" className="block text-sm font-medium text-gray-700">
                   From
                 </label>
                 <input
@@ -49,10 +55,7 @@ const TrainsBusesPage = () => {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="destination"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="destination" className="block text-sm font-medium text-gray-700">
                   To
                 </label>
                 <input
@@ -67,10 +70,7 @@ const TrainsBusesPage = () => {
               </div>
             </div>
             <div className="pt-2">
-              <button
-                type="submit"
-                className="w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700"
-              >
+              <button type="submit" className="w-full bg-red-600 text-white font-semibold py-3 rounded-md hover:bg-red-700">
                 Search Tickets
               </button>
             </div>
@@ -82,3 +82,4 @@ const TrainsBusesPage = () => {
 };
 
 export default TrainsBusesPage;
+
