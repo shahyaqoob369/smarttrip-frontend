@@ -9,13 +9,10 @@ const TrainsBusesPage = () => {
 
     const affiliateMarker = "661841";
 
-    // Use Omio homepage with query parameters
-    const baseUrl = "https://www.omio.com/";
-
-    // Omio accepts `from` and `to` directly on homepage links
-    const searchUrl = `${baseUrl}?shmarker=${affiliateMarker}&from=${encodeURIComponent(
+    // Omio search deep link format
+    const searchUrl = `https://www.omio.com/search/?de=${encodeURIComponent(
       origin
-    )}&to=${encodeURIComponent(destination)}`;
+    )}&arr=${encodeURIComponent(destination)}&shmarker=${affiliateMarker}`;
 
     window.open(searchUrl, "_blank", "noopener,noreferrer");
   };
