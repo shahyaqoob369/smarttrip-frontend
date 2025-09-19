@@ -4,8 +4,8 @@ const HostelsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef(null);
 
-  // This is the correct and official script for the Hostelworld widget.
-  const widgetScript = `//tpwdg.com/content?currency=usd&trs=446991&shmarker=661841&host=www.hostelworld.com&locale=en&powered_by=true&promo_id=4133&campaign_id=203`;
+  // ✅ Same base widget as Hotels, but force the result page to filter hostels
+  const widgetScript = `//tpwdg.com/content?currency=usd&trs=446991&shmarker=661841&show_hotels=true&powered_by=true&locale=en&searchUrl=search.hotellook.com/#f%5Bproperty_types%5D%3D7&primary_override=%23FF8E01&color_button=%23FF8E01&color_icons=%23FF8E01&secondary=%23FFFFFF&dark=%23262626&light=%23FFFFFF&special=%23C4C4C4&color_focused=%23FF8E01&border_radius=5&plain=false&promo_id=7873&campaign_id=101`;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -50,9 +50,25 @@ const HostelsPage = () => {
           <div id="hostel-widget-container" ref={containerRef} className="relative min-h-[350px]">
             {isLoading && (
               <div className="absolute inset-0 flex flex-col justify-center items-center bg-gray-50/50 rounded-lg">
-                <svg className="animate-spin h-8 w-8 text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <svg
+                  className="animate-spin h-8 w-8 text-orange-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
                 </svg>
                 <p className="mt-4 text-gray-500">Loading hostel search...</p>
               </div>
