@@ -36,8 +36,10 @@ const services = [
   { type: 'widget', label: 'Airport Transfers', Icon: TransferIcon, to: '/transfers', colorClass: 'bg-teal-500', animationType: 'fly-away', videoSrc: transferVideo },
   { type: 'widget', label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-rose-500', animationType: 'coin-flip', videoSrc: esimVideo },
   { type: 'widget', label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500', animationType: 'bounce', videoSrc: compensationVideo },
-  
-  { type: 'direct', label: 'Hostels', Icon: HostelIcon, serviceKey: 'hostels', colorClass: 'bg-violet-500', animationType: 'bounce', videoSrc: hostelVideo },
+  { type: 'widget', label: 'Hostels', Icon: HostelIcon, to: '/hostels', colorClass: 'bg-violet-500', animationType: 'bounce', videoSrc: hostelVideo },
+
+    
+  // { type: 'direct', label: 'Hostels', Icon: HostelIcon, serviceKey: 'hostels', colorClass: 'bg-violet-500', animationType: 'bounce', videoSrc: hostelVideo },
   { type: 'direct', label: 'Vacation Rentals', Icon: VacationIcon, serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500', animationType: 'fly-away-diagonal', videoSrc: vacationVideo },
   { type: 'direct', label: 'Trains & Buses', Icon: TrainIcon, serviceKey: 'trains-buses', colorClass: 'bg-red-500', animationType: 'come-forward', videoSrc: trainVideo },
   { type: 'direct', label: 'Tours & Activities', Icon: ToursIcon, serviceKey: 'tours-activities', colorClass: 'bg-yellow-500', animationType: 'balloon-fly', videoSrc: tourVideo },
