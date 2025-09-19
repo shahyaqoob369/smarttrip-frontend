@@ -24,7 +24,8 @@ const ActivitiesPage = () => {
           <span>Tours & Activities</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Discover and book unforgettable experiences around the world.
+          We’ve found today’s best experience provider.
+        Browse and book activities instantly.
         </p>
         <div className="border-t pt-8">
           {/* Our New Custom Search Form */}
