@@ -6,15 +6,15 @@ const TrainsBusesPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // This is the client's unique affiliate ID for Travelpayouts
+    // This is the client's unique affiliate ID for Travelpayouts.
     const affiliateMarker = '661841'; 
     
-    // MODIFICATION: This is the correct base URL for generating an Omio search.
-    // We are now building the URL directly for Omio's search engine.
-    const baseUrl = 'https://www.omio.com/search-frontend/results';
+    // --- FIX: The base URL now correctly points to the Omio homepage. ---
+    // This is the proper entry point for initiating a search.
+    const baseUrl = 'https://www.omio.com/';
 
-    // MODIFICATION: The parameter names have been updated to match what Omio's system expects.
-    // We are also including the essential 'shmarker' for affiliate tracking.
+    // We build a query string with the search parameters. Omio's system
+    // will detect these parameters and automatically run the search when the page loads.
     const queryParams = new URLSearchParams({
       departure_name: origin,
       arrival_name: destination,
@@ -23,6 +23,7 @@ const TrainsBusesPage = () => {
 
     const searchUrl = `${baseUrl}?${queryParams}`;
     
+    // Open the correctly formatted search URL in a new tab.
     window.open(searchUrl, '_blank', 'noopener,noreferrer');
   };
 
@@ -81,3 +82,4 @@ const TrainsBusesPage = () => {
 };
 
 export default TrainsBusesPage;
+
