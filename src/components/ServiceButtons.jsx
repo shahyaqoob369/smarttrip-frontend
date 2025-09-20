@@ -40,7 +40,7 @@ const services = [
   { type: 'widget', label: 'Vacation Rentals', Icon: VacationIcon, to: '/vacation-rentals', colorClass: 'bg-sky-500', animationType: 'fly-away-diagonal', videoSrc: vacationVideo },
   { type: 'widget', label: 'Trains & Buses', Icon: TrainIcon, to: '/trains-buses', colorClass: 'bg-red-500', animationType: 'come-forward', videoSrc: trainVideo },
   { type: 'widget', label: 'Tours & Activities', Icon: ToursIcon, to: '/activities', colorClass: 'bg-yellow-500', animationType: 'balloon-fly', videoSrc: tourVideo },
-  { type: 'widget', label: 'Yachts & Cruises', Icon: YachtIcon, to: '/cruises', colorClass: 'bg-indigo-700', animationType: 'on-water', videoSrc: yachtVideo },
+  { type: 'widget', label: 'Yachts & Cruises', Icon: YachtIcon, to: '/cruises', colorClass: 'bg-indigo-500', animationType: 'on-water', videoSrc: yachtVideo },
   { type: 'widget', label: 'Travel Insurance', Icon: InsuranceIcon, to: '/insurance', colorClass: 'bg-lime-500', animationType: 'spin', videoSrc: insuranceVideo },
 
     

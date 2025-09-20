@@ -118,7 +118,7 @@ const ServiceButton = ({ service }) => {
     transition={{ type: "spring", stiffness: 400, damping: 15 }}
   >
     {/* Border wrapper */}
-    <div className="relative p-1 bg-transparent rounded-xl ring-4 ring-white">
+    <div className="relative p-1 bg-transparent rounded-xl ring-4 ring-brand-blue">
       <div
         role="button"
         tabIndex="0"

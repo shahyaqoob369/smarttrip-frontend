@@ -8,7 +8,7 @@ import planeAnimationData from '../assets/animations/plane.json';
 const IntroAnimation = ({ onAnimationComplete }) => {
   return (
     <motion.div
-      className="fixed inset-0 bg-brand-blue flex items-center justify-center z-50"
+      className="fixed inset-0 bg-sky-100 flex items-center justify-center z-50"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       transition={{ duration: 0.5, delay: 2.5 }}
