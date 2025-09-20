@@ -39,9 +39,9 @@ const IntroAnimation = ({ onAnimationComplete }) => {
           transition={{ duration: 1, ease: "easeOut" }}
         >
           <h1 className="text-5xl lg:text-7xl font-bold text-white">
-            <span className="text-white">Smart</span>
+            <span className="text-blue-600">Smart</span>
             <span className="text-orange-400">Trip</span>
-            <span className="text-white">Deals</span>
+            <span className="text-blue-600">Deals</span>
           </h1>
         </motion.div>
 
