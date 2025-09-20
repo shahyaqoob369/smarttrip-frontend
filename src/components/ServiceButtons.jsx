@@ -15,21 +15,34 @@ import InsuranceIcon from '../assets/icons/insurance_new.svg?react';
 import EsimIcon from '../assets/icons/esim_new.svg?react';
 import CompensationIcon from '../assets/icons/compensation_new.svg?react';
 
+import flightVideo from '../assets/videos/flight.mp4';
+import carVideo from '../assets/videos/car.mp4';
+import hotelVideo from '../assets/videos/hotel.mp4';
+import transferVideo from '../assets/videos/transfer.mp4';
+import esimVideo from '../assets/videos/esim.mp4';
+import compensationVideo from '../assets/videos/compensation.mp4';
+import hostelVideo from '../assets/videos/hostel.mp4';
+import vacationVideo from '../assets/videos/vacation.mp4';
+import trainVideo from '../assets/videos/train.mp4';
+import tourVideo from '../assets/videos/tour.mp4';
+import yachtVideo from '../assets/videos/yacht.mp4';
+import insuranceVideo from '../assets/videos/insurance.mp4';
+
 // The definitive list of services with their assigned animation types.
 const services = [
-  { type: 'widget', label: 'Flights', Icon: FlightIcon, to: '/flights', colorClass: 'bg-orange-500', animationType: 'fly-away', videoSrc: '/videos/flight.mp4' },
-  { type: 'widget', label: 'Car Rentals', Icon: CarIcon, to: '/cars', colorClass: 'bg-green-500', animationType: 'shake-and-shrink', videoSrc: '/videos/car.mp4' },
-  { type: 'widget', label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800', animationType: 'spin', videoSrc: '/videos/hotel.mp4' },
-  { type: 'widget', label: 'Airport Transfers', Icon: TransferIcon, to: '/transfers', colorClass: 'bg-teal-500', animationType: 'fly-away', videoSrc: '/videos/transfer.mp4' },
-  { type: 'widget', label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-rose-500', animationType: 'coin-flip', videoSrc: '/videos/esim.mp4' },
-  { type: 'widget', label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500', animationType: 'bounce', videoSrc: '/videos/compensation.mp4' },
-  { type: 'widget', label: 'Hostels', Icon: HostelIcon, to: '/hostels', colorClass: 'bg-violet-500', animationType: 'bounce', videoSrc: '/videos/hostel.mp4' },
-  { type: 'widget', label: 'Vacation Rentals', Icon: VacationIcon, to: '/vacation-rentals', colorClass: 'bg-sky-500', animationType: 'fly-away-diagonal', videoSrc: '/videos/vacation.mp4' },
-  { type: 'widget', label: 'Trains & Buses', Icon: TrainIcon, to: '/trains-buses', colorClass: 'bg-red-500', animationType: 'come-forward', videoSrc: '/videos/train.mp4' },
-  { type: 'widget', label: 'Tours & Activities', Icon: ToursIcon, to: '/activities', colorClass: 'bg-yellow-500', animationType: 'balloon-fly', videoSrc: '/videos/tour.mp4' },
-  { type: 'widget', label: 'Yachts & Cruises', Icon: YachtIcon, to: '/cruises', colorClass: 'bg-indigo-700', animationType: 'on-water', videoSrc: '/videos/yacht.mp4' },
-  { type: 'widget', label: 'Travel Insurance', Icon: InsuranceIcon, to: '/insurance', colorClass: 'bg-lime-500', animationType: 'spin', videoSrc: '/videos/insurance.mp4' },
-];
+  { type: 'widget', label: 'Flights', Icon: FlightIcon, to: '/flights', colorClass: 'bg-orange-500', animationType: 'fly-away', videoSrc: flightVideo },
+  { type: 'widget', label: 'Car Rentals', Icon: CarIcon, to: '/cars', colorClass: 'bg-green-500', animationType: 'shake-and-shrink', videoSrc: carVideo },
+  { type: 'widget', label: 'Hotels', Icon: HotelIcon, to: '/hotels', colorClass: 'bg-blue-800', animationType: 'spin', videoSrc: hotelVideo },
+  { type: 'widget', label: 'Airport Transfers', Icon: TransferIcon, to: '/transfers', colorClass: 'bg-teal-500', animationType: 'fly-away', videoSrc: transferVideo },
+  { type: 'widget', label: 'eSIM Cards', Icon: EsimIcon, to: '/esim', colorClass: 'bg-rose-500', animationType: 'coin-flip', videoSrc: esimVideo },
+  { type: 'widget', label: 'Flight Compensation', Icon: CompensationIcon, to: '/compensation', colorClass: 'bg-fuchsia-500', animationType: 'bounce', videoSrc: compensationVideo },
+  { type: 'widget', label: 'Hostels', Icon: HostelIcon, to: '/hostels', colorClass: 'bg-violet-500', animationType: 'bounce', videoSrc: hostelVideo },
+  { type: 'widget', label: 'Vacation Rentals', Icon: VacationIcon, to: '/vacation-rentals', colorClass: 'bg-sky-500', animationType: 'fly-away-diagonal', videoSrc: vacationVideo },
+  { type: 'widget', label: 'Trains & Buses', Icon: TrainIcon, to: '/trains-buses', colorClass: 'bg-red-500', animationType: 'come-forward', videoSrc: trainVideo },
+  { type: 'widget', label: 'Tours & Activities', Icon: ToursIcon, to: '/activities', colorClass: 'bg-yellow-500', animationType: 'balloon-fly', videoSrc: tourVideo },
+  { type: 'widget', label: 'Yachts & Cruises', Icon: YachtIcon, to: '/cruises', colorClass: 'bg-indigo-700', animationType: 'on-water', videoSrc: yachtVideo },
+  { type: 'widget', label: 'Travel Insurance', Icon: InsuranceIcon, to: '/insurance', colorClass: 'bg-lime-500', animationType: 'spin', videoSrc: insuranceVideo },
+
     
   // { type: 'direct', label: 'Hostels', Icon: HostelIcon, serviceKey: 'hostels', colorClass: 'bg-violet-500', animationType: 'bounce', videoSrc: hostelVideo },
   // { type: 'direct', label: 'Vacation Rentals', Icon: VacationIcon, serviceKey: 'vacation-rentals', colorClass: 'bg-sky-500', animationType: 'fly-away-diagonal', videoSrc: vacationVideo },
@@ -37,7 +50,7 @@ const services = [
   // { type: 'direct', label: 'Tours & Activities', Icon: ToursIcon, serviceKey: 'tours-activities', colorClass: 'bg-yellow-500', animationType: 'balloon-fly', videoSrc: tourVideo },
   // { type: 'direct', label: 'Yachts & Cruises', Icon: YachtIcon, serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500', animationType: 'on-water', videoSrc: yachtVideo },
   // { type: 'direct', label: 'Travel Insurance', Icon: InsuranceIcon, serviceKey: 'travel-insurance', colorClass: 'bg-lime-500', animationType: 'spin', videoSrc: insuranceVideo },
-// ];
+];
 
 const ServiceButtons = () => {
   return (
