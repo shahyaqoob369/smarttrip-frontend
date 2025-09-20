@@ -4,7 +4,7 @@ import Footer from './Footer';
 
 const ServicePageLayout = ({ children }) => {
   return (
-    <div className="bg-sky-100 min-h-screen flex flex-col">
+    <div className="bg-brand-blue min-h-screen flex flex-col">
       {/* This is the simple header for service pages */}
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
