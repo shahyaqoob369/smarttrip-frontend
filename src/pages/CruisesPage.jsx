@@ -24,8 +24,8 @@ const CruisesPage = () => {
           <span>Yachts & Cruises</span>
         </h1>
         <p className="mb-8 text-gray-600 text-center">
-          Find and book luxury yachts and unforgettable cruise experiences with
-          our partner, Searadar.
+          We’ve found today’s best yacht rental provider.
+            Browse premium boat experiences below.
         </p>
         <div className="border-t pt-8">
           <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto">
