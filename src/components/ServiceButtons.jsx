@@ -46,7 +46,8 @@ const services = [
   { type: 'widget', label: 'Trains & Buses', Icon: TrainIcon, to: '/trains-buses', colorClass: 'bg-red-500', animationType: 'come-forward', videoSrc: trainVideo },
   // { type: 'direct', label: 'Tours & Activities', Icon: ToursIcon, serviceKey: 'tours-activities', colorClass: 'bg-yellow-500', animationType: 'balloon-fly', videoSrc: tourVideo },
   { type: 'widget', label: 'Tours & Activities', Icon: ToursIcon, to: '/activities', colorClass: 'bg-yellow-500', animationType: 'balloon-fly', videoSrc: tourVideo },
-  { type: 'direct', label: 'Yachts & Cruises', Icon: YachtIcon, serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500', animationType: 'on-water', videoSrc: yachtVideo },
+  // { type: 'direct', label: 'Yachts & Cruises', Icon: YachtIcon, serviceKey: 'yachts-cruises', colorClass: 'bg-indigo-500', animationType: 'on-water', videoSrc: yachtVideo },
+  { type: 'widget', label: 'Yachts & Cruises', Icon: YachtIcon, to: '/cruises', colorClass: 'bg-indigo-500', animationType: 'on-water', videoSrc: yachtVideo },
   { type: 'direct', label: 'Travel Insurance', Icon: InsuranceIcon, serviceKey: 'travel-insurance', colorClass: 'bg-lime-500', animationType: 'spin', videoSrc: insuranceVideo },
 ];
 
