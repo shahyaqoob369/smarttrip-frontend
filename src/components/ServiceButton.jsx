@@ -11,14 +11,24 @@ const ServiceButton = ({ service }) => {
   const iconControls = useAnimationControls();
   const { playVideo } = useVideoPlayer();
 
-  const truncateLongWords = (label, maxChars = 9) => {
-    if (!label || typeof label !== 'string') return label || '';
-    return label
-      .split(/\s+/) // split on whitespace
-      .map((word) => (word.length > maxChars ? word.slice(0, maxChars) + '...' : word))
-      .join(' ');
+  const renderHyphenatedLabel = (label, maxChars = 7) => {
+    if (!label) return null;
+    const words = label.split(/\s+/);
+    return words.map((word, idx) => (
+      <React.Fragment key={idx}>
+        {word.length <= maxChars ? (
+          <span className="inline-block">{word}</span>
+        ) : (
+          <span className="inline-block leading-tight">
+            <span className="block">{word.slice(0, maxChars)}-</span>
+            <span className="block">{word.slice(maxChars)}</span>
+          </span>
+        )}
+        {/* preserve a normal space between words */}
+        {idx < words.length - 1 && ' '}
+      </React.Fragment>
+    ));
   };
-  const renderedLabel = truncateLongWords(service.label, 9);
 
   const trackEvent = () => {
     ReactGA.event({
@@ -113,11 +123,9 @@ const ServiceButton = ({ service }) => {
         <motion.div animate={iconControls}>
             <service.Icon className="h-8 w-8 text-white" />
         </motion.div>
-      <span className="mt-2 px-2 sm:px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight break-words"
-        aria-label={service.label}
-      >
-        {renderedLabel}
-        </span>
+      <span className="mt-2 px-2 sm:px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight break-words">
+        {renderHyphenatedLabel(service.label, 7)}
+      </span>
       </>
   );
 
