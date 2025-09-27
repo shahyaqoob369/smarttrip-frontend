@@ -11,18 +11,14 @@ const ServiceButton = ({ service }) => {
   const iconControls = useAnimationControls();
   const { playVideo } = useVideoPlayer();
 
-  const truncateLongWords = (text, maxLength = 9) => {
-    if (!text) return '';
-    return text
-      .split(' ')
-      .map(word => {
-        if (word.length > maxLength) {
-          return word.substring(0, maxLength) + '...';
-        }
-        return word;
-      })
+  const truncateLongWords = (label, maxChars = 9) => {
+    if (!label || typeof label !== 'string') return label || '';
+    return label
+      .split(/\s+/) // split on whitespace
+      .map((word) => (word.length > maxChars ? word.slice(0, maxChars) + '...' : word))
       .join(' ');
   };
+  const renderedLabel = truncateLongWords(service.label, 9);
 
   const trackEvent = () => {
     ReactGA.event({
@@ -117,8 +113,10 @@ const ServiceButton = ({ service }) => {
         <motion.div animate={iconControls}>
             <service.Icon className="h-8 w-8 text-white" />
         </motion.div>
-      <span className="mt-2 px-2 sm:px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight break-words">
-        {truncateLongWords(service.label)}
+      <span className="mt-2 px-2 sm:px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight break-words"
+        aria-label={service.label}
+      >
+        {renderedLabel}
         </span>
       </>
   );
