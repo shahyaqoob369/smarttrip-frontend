@@ -113,15 +113,14 @@ const ServiceButton = ({ service }) => {
   };
 
   const buttonContent = (
-    <>
-      <motion.div animate={iconControls}>
-        <service.Icon className="h-20 w-20 text-white" />
-      </motion.div>
-      <span className="mt-2 px-2 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight">
-        {/* MODIFICATION: Use the new truncation function on the label */}
+      <>
+        <motion.div animate={iconControls}>
+            <service.Icon className="h-8 w-8 text-white" />
+        </motion.div>
+      <span className="mt-2 px-2 sm:px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight break-words">
         {truncateLongWords(service.label)}
-      </span>
-    </>
+        </span>
+      </>
   );
 
   return (
