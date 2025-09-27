@@ -6,11 +6,21 @@ import { useVideoPlayer } from '../context/VideoPlayerContext';
 
 const ServiceButton = ({ service }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false); 
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const iconControls = useAnimationControls();
   const { playVideo } = useVideoPlayer();
 
+  // ✅ Detect screen size
+  useEffect(() => {
+    const checkScreenSize = () => setIsSmallScreen(window.innerWidth < 768); // "sm" breakpoint
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  // ----------------- hyphenate words longer than `maxChars` -----------------
   const renderHyphenatedLabel = (label, maxChars = 7) => {
     if (!label) return null;
     const words = label.split(/\s+/);
@@ -24,7 +34,6 @@ const ServiceButton = ({ service }) => {
             <span className="block">{word.slice(maxChars)}</span>
           </span>
         )}
-        {/* preserve a normal space between words */}
         {idx < words.length - 1 && ' '}
       </React.Fragment>
     ));
@@ -124,7 +133,9 @@ const ServiceButton = ({ service }) => {
             <service.Icon className="h-8 w-8 text-white" />
         </motion.div>
       <span className="mt-2 px-2 sm:px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight break-words">
-        {renderHyphenatedLabel(service.label, 7)}
+        {isSmallScreen
+          ? renderHyphenatedLabel(service.label, 7)
+          : service.label}
       </span>
       </>
   );
