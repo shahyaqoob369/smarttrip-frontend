@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 import { motion, useAnimationControls } from 'framer-motion';
