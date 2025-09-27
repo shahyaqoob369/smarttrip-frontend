@@ -104,7 +104,7 @@ const ServiceButton = ({ service }) => {
         <motion.div animate={iconControls}>
             <service.Icon className="h-8 w-8 text-white" />
         </motion.div>
-        <span className="mt-2 text-sm font-semibold text-white text-center">
+      <span className="mt-2 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight">
             {service.label}
         </span>
       </>
