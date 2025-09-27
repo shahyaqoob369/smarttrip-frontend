@@ -104,7 +104,7 @@ const ServiceButton = ({ service }) => {
         <motion.div animate={iconControls}>
             <service.Icon className="h-8 w-8 text-white" />
         </motion.div>
-      <span className="mt-2 px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight">
+      <span className="mt-2 px-2 sm:px-3 text-xs sm:text-sm md:text-base font-bold text-white text-center uppercase tracking-wide leading-tight break-words">
             {service.label}
         </span>
       </>
@@ -124,7 +124,7 @@ const ServiceButton = ({ service }) => {
         tabIndex="0"
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-        className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        className={`group w-full h-28 flex flex-col items-center justify-center px-4 py-5 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
