@@ -117,14 +117,14 @@ const ServiceButton = ({ service }) => {
     whileTap={{ scale: 0.95 }} 
     transition={{ type: "spring", stiffness: 400, damping: 15 }}
   >
-    {/* This wrapper seems to have been added in your code, keeping it as is */}
-    <div className="relative p-1 bg-transparent rounded-xl">
+    {/* Border wrapper */}
+    <div className="relative p-1 bg-transparent rounded-xl ring-4 ring-brand-blue">
       <div
         role="button"
         tabIndex="0"
         onClick={!isLoading ? handleAnimatedClick : undefined}
         onKeyPress={(e) => { if (!isLoading && e.key === 'Enter') handleAnimatedClick(e); }}
-        className={`group w-full h-32 flex flex-col items-center justify-between py-2 rounded-2xl shadow-lg transition-all duration-200 overflow-hidden cursor-pointer ring-4 ring-inset ring-white/75 ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
+        className={`group w-full h-28 flex flex-col items-center justify-center p-4 rounded-lg shadow-md transition-all duration-200 overflow-hidden cursor-pointer ${service.colorClass} ${isLoading ? 'opacity-75 cursor-not-allowed' : ''}`}
       >
         {isLoading ? (
             <>
@@ -139,9 +139,11 @@ const ServiceButton = ({ service }) => {
     </div>
   </motion.div>
 );
+
 };
 
 export default ServiceButton;
+
 
 
 
