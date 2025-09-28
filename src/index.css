@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Force the Google Translate gadget to display properly */
+.goog-te-gadget {
+  display: block !important;
+  white-space: normal !important;
+  font-size: 14px !important;
+}
+
+/* Style the dropdown */
+#google_translate_element select {
+  width: 100% !important;
+  max-width: 180px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Add scrolling for long language lists */
+.goog-te-menu2 {
+  max-height: 200px !important;
+  overflow-y: auto !important;
+  width: 180px !important;
+  border-radius: 8px !important;
+}
+
+/* Remove Google’s default inline text (like "Powered by") */
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget span {
+  display: none !important;
+}
+
+
+
+
+
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
