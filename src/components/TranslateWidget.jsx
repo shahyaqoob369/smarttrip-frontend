@@ -8,14 +8,14 @@ const TranslateWidget = () => {
     }
 
     // Define the initialization function
+    // Define the initialization function and attach it to the window object
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
-          pageLanguage: 'en', // Default language of your site
-          includedLanguages: 'en,es,fr,de,it,ru', // Optional: restrict to specific languages
+          pageLanguage: 'en', // The original language of your site
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
         },
-        'google_translate_element'
+        'google_translate_element' // The ID of the div where the widget will appear
       );
     };
 
@@ -58,16 +58,16 @@ export default TranslateWidget;
 //       return;
 //     }
 
-//     // Define the initialization function and attach it to the window object
-//     window.googleTranslateElementInit = () => {
-//       new window.google.translate.TranslateElement(
-//         {
-//           pageLanguage: 'en', // The original language of your site
-//           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
-//         },
-//         'google_translate_element' // The ID of the div where the widget will appear
-//       );
-//     };
+    // // Define the initialization function and attach it to the window object
+    // window.googleTranslateElementInit = () => {
+    //   new window.google.translate.TranslateElement(
+    //     {
+    //       pageLanguage: 'en', // The original language of your site
+    //       layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+    //     },
+    //     'google_translate_element' // The ID of the div where the widget will appear
+    //   );
+    // };
 
 //     // Create a new script element for the Google Translate API
 //     const script = document.createElement('script');
