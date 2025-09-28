@@ -2,23 +2,30 @@ import React, { useEffect } from 'react';
 
 const TranslateWidget = () => {
   useEffect(() => {
+    // Check if the script has already been added to the page
     if (document.getElementById('google-translate-script')) {
       return;
     }
+
+    // Define the initialization function and attach it to the window object
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
-          pageLanguage: 'en',
+          pageLanguage: 'en', // The original language of your site
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
         },
-        'google_translate_element'
+        'google_translate_element' // The ID of the div where the widget will appear
       );
     };
+
+    // Create a new script element for the Google Translate API
     const script = document.createElement('script');
     script.id = 'google-translate-script';
     script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     script.async = true;
     document.body.appendChild(script);
+
+    // This is a cleanup function that will run when the component is removed
     return () => {
       const scriptElement = document.getElementById('google-translate-script');
       if (scriptElement) {
@@ -28,8 +35,8 @@ const TranslateWidget = () => {
     };
   }, []);
 
-  // MODIFICATION: Added 'flex-shrink-0' to prevent the widget from shrinking
-  return <div id="google_translate_element" className="flex-shrink-0"></div>;
+  // This is the div where Google will render the language switcher
+  return <div id="google_translate_element"></div>;
 };
 
 export default TranslateWidget;

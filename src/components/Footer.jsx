@@ -37,9 +37,8 @@ const Footer = () => {
                 </svg>
               </button>
 
-              {/* MODIFICATION: Added 'flex' to make it a flex container */}
               <div
-                className={`absolute bottom-full mb-2 w-64 bg-white rounded-md shadow-lg p-2 flex overflow-x-auto transition-opacity duration-200 ${isLangDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+                className={`absolute bottom-full mb-2 w-40 bg-white rounded-md shadow-lg p-2 transition-opacity duration-200 ${isLangDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                   }`}
               >
                 <TranslateWidget />
