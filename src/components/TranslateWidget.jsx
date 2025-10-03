@@ -7,14 +7,27 @@ const TranslateWidget = () => {
       return;
     }
 
-    // Define the initialization function and attach it to the window object
+    // // Define the initialization function and attach it to the window object
+    // window.googleTranslateElementInit = () => {
+    //   new window.google.translate.TranslateElement(
+    //     {
+    //       pageLanguage: 'en', // The original language of your site
+    //       layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+    //     },
+    //     'google_translate_element' // The ID of the div where the widget will appear
+    //   );
+    // };
+
+    // Define the initialization function
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
-          pageLanguage: 'en', // The original language of your site
+          pageLanguage: 'en', // Default language of your site
+          // MODIFICATION: Added the new language codes
+          includedLanguages: 'en,es,pt,ar,fr,it,hi,zh-CN,de,ru,ja,ko',
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
         },
-        'google_translate_element' // The ID of the div where the widget will appear
+        'google_translate_element'
       );
     };
 
