@@ -22,7 +22,9 @@ const VideoOverlay = () => {
             muted
             playsInline
             onEnded={stopVideo}
-            className="w-full h-auto max-w-4xl max-h-[80vh] rounded-lg shadow-2xl"
+            // className="w-full h-auto max-w-4xl max-h-[80vh] rounded-lg shadow-2xl"
+            className="w-full h-auto max-w-lg max-h-[40vh] rounded-lg shadow-2xl"
+
           />
         </motion.div>
       )}
