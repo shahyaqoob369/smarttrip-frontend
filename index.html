@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SmartTripDeals</title>
 
@@ -11,8 +13,29 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'AW-656221050');
+    </script>
+    <script>
+      gtag('event', 'conversion', {'send_to': 'AW-656221050/WdfvCJKpl6wbEPrG9LgC'});
+    </script>
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            // Use window.open for direct links to ensure they open in a new tab
+            if (!url.startsWith('/')) {
+              window.open(url, '_blank', 'noopener,noreferrer');
+            } else {
+              window.location = url;
+            }
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-656221050/WdfvCJKpl6wbEPrG9LgC',
+            'event_callback': callback
+        });
+        return false;
+      }
     </script>
     </head>
   <body>
